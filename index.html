@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Smoke House Kitchen</title>
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="apple-touch-icon" href="./icon-192.png">
+<link rel="icon" href="./icon-192.png">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<template id="__bundler_thumbnail"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="#E73F1E"></rect><text x="50" y="62" font-family="Helvetica,Arial" font-size="30" font-weight="700" fill="#fff" text-anchor="middle">SH</text></svg></template>
+<helmet>
+<meta name="theme-color" content="#121212">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Smoke House">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.js"></script>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#e8e6e4;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-weight:300;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility;font-kerning:normal;font-variant-numeric:tabular-nums;color:#121212}
+*{box-sizing:border-box}
+a{color:#E73F1E}a:hover{color:#b52f13}
+input,textarea,button{font-family:inherit}
+button{cursor:pointer}
+*::-webkit-scrollbar{display:none}
+@keyframes steam{0%{transform:translateY(8px) scaleY(.6);opacity:0}40%{opacity:.9}100%{transform:translateY(-24px) scaleY(1.1);opacity:0}}
+@keyframes toss{0%,100%{transform:translateY(0)}50%{transform:translateY(-16px)}}
+@keyframes pulse{0%{transform:scale(.8);opacity:.7}100%{transform:scale(1.9);opacity:0}}
+@keyframes sheetUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
+@keyframes slideIn{from{transform:translateX(-100%)}to{transform:translateX(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes kb{from{transform:scale(1)}to{transform:scale(1.14)}}
+@keyframes prog{from{width:0}to{width:100%}}
+</style>
+</helmet>
+<div style="min-height:100vh;display:flex;flex-wrap:wrap;align-items:flex-start;justify-content:center;gap:40px;padding:{{outerPad}};background:{{outerBg}}">
+<div style="position:relative;width:{{phoneW}};height:{{phoneH}};border-radius:{{phoneR}};background:#0d0d0d;padding:{{phonePad}};box-shadow:{{phoneShadow}}">
+<div style="position:relative;width:100%;height:100%;border-radius:{{screenR}};overflow:hidden;background:#fff">
+
+<div style="position:absolute;top:0;left:0;right:0;height:{{topOff}};z-index:30;display:flex;align-items:center;justify-content:space-between;padding:0 30px;font-size:14px;font-family:Poppins,sans-serif;font-weight:600;background:{{statusBg}};color:{{statusFg}}">
+<sc-if value="{{framed}}" hint-placeholder-val="{{ true }}"><span>1:13</span>
+<div style="display:flex;align-items:center;gap:6px;font-size:12px;font-weight:400"><span>5G</span><div style="width:24px;height:12px;border:1.5px solid {{statusFg}};border-radius:3px;padding:1px"><div style="width:65%;height:100%;background:{{statusFg}};border-radius:1px"></div></div></div></sc-if>
+</div>
+
+<sc-if value="{{isInvalid}}">
+<div style="position:absolute;top:{{topOff}};left:0;right:0;bottom:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:32px;text-align:center;gap:14px">
+<div style="width:72px;height:72px;border-radius:50%;background:#121212;color:#fff;font-size:36px;font-family:Poppins,sans-serif;font-weight:600;display:flex;align-items:center;justify-content:center">!</div>
+<div style="font-size:24px;font-family:Poppins,sans-serif;font-weight:600;">This QR code can't be used</div>
+<div style="font-size:15px;line-height:1.5;color:rgba(18,18,18,.65);text-wrap:pretty">It may be expired or damaged. Scan the code on your table again, or ask a staff member.</div>
+<button onClick="{{rescan}}" style="margin-top:10px;height:52px;padding:0 28px;border-radius:14px;border:none;background:#E73F1E;color:#fff;font-size:16px;font-family:Poppins,sans-serif;font-weight:600">Scan again</button>
+</div>
+</sc-if>
+
+<sc-if value="{{isMenu}}" hint-placeholder-val="{{ true }}">
+<div ref="{{scrollRef}}" onScroll="{{onScroll}}" style="position:absolute;top:{{topOff}};left:0;right:0;bottom:0;overflow-y:auto;background:#fff">
+<div style="background:#121212;padding:4px 16px 18px;border-radius:0 0 28px 28px">
+<div style="display:flex;align-items:center;justify-content:space-between;height:56px">
+<button onClick="{{openDrawer}}" aria-label="Open menu" style="width:44px;height:44px;border-radius:22px;border:none;background:rgba(255,255,255,.12);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px"><span style="width:18px;height:2px;background:#fff;border-radius:2px"></span><span style="width:18px;height:2px;background:#fff;border-radius:2px"></span><span style="width:18px;height:2px;background:#fff;border-radius:2px"></span></button>
+<div aria-label="Smoke House Kitchen" style="width:54px;height:54px;border-radius:50%;background:#E73F1E;box-shadow:inset 0 0 0 3px #E73F1E,inset 0 0 0 4.5px #fff;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;line-height:1"><span style="font-family:Poppins,sans-serif;font-weight:600;font-size:17px;letter-spacing:1px">SH</span><span style="font-family:Poppins,sans-serif;font-weight:500;font-size:5.5px;letter-spacing:1.4px;margin-top:2px">KITCHEN</span></div>
+<button onClick="{{openProfile}}" aria-label="Profile" style="width:44px;height:44px;border-radius:22px;border:none;background:rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="4"></circle><path d="M4 21c1-4 4-6 8-6s7 2 8 6"></path></svg></button>
+</div>
+<div style="background:#fff;border-radius:22px;padding:16px 18px;margin-top:8px">
+<div style="display:flex;justify-content:space-between;gap:12px">
+<div style="min-width:0">
+<div style="font-size:24px;font-family:Poppins,sans-serif;font-weight:600;line-height:1.15">Smoke House Kitchen</div>
+<div style="font-size:14px;color:rgba(18,18,18,.6);margin-top:5px">Burgers · North Indian · Indiranagar</div>
+</div>
+<div style="display:flex;flex-direction:column;align-items:center;gap:4px;flex:none">
+<div style="background:#121212;color:#fff;border-radius:10px;padding:5px 10px;font-family:Poppins,sans-serif;font-weight:600;font-size:15px">4.3 ★</div>
+<div style="font-size:11px;color:rgba(18,18,18,.55);font-weight:400">1.6K+ ratings</div>
+</div>
+</div>
+<div style="height:1px;background:rgba(18,18,18,.08);margin:14px 0 12px"></div>
+<div style="display:flex;align-items:center;justify-content:space-between;gap:8px">
+<button onClick="{{openSwitch}}" style="display:inline-flex;align-items:center;gap:7px;background:#FDECE8;color:#E73F1E;font-family:Poppins,sans-serif;font-weight:600;font-size:13px;padding:7px 11px;border-radius:999px;border:none"><span style="width:7px;height:7px;border-radius:50%;background:#E73F1E"></span>{{contextLabel}}<span style="font-size:11px;font-weight:400">▾</span></button>
+<div style="font-size:13px;color:rgba(18,18,18,.6);font-family:Poppins,sans-serif;font-weight:500">Open · till 11 pm</div>
+</div>
+</div>
+<div style="color:#fff;font-size:14px;font-family:Poppins,sans-serif;font-weight:500;text-align:center;margin-top:14px">{{heroNote}}</div>
+</div>
+
+<div onPointerEnter="{{pauseBanner}}" onPointerLeave="{{resumeBanner}}">
+<div ref="{{bannerRef}}" onScroll="{{onBannerScroll}}" role="region" aria-label="Offers" style="display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding:16px 16px 10px;scroll-padding:0 16px">
+<div style="flex:0 0 100%;scroll-snap-align:start;height:156px;border-radius:18px;position:relative;overflow:hidden;background:#121212">
+<img src="https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?w=600&amp;q=70&amp;auto=format&amp;fit=crop" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+<div style="position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.78) 0%,rgba(0,0,0,.45) 55%,rgba(0,0,0,0) 100%)"></div>
+<div style="position:relative;height:100%;padding:16px 18px;display:flex;flex-direction:column;color:#fff;max-width:70%">
+<div style="font-family:Poppins,sans-serif;font-size:11px;font-weight:500;letter-spacing:1px;color:#fff">FLAT ₹50 OFF</div>
+<div style="font-family:Poppins,sans-serif;font-size:21px;font-family:Poppins,sans-serif;font-weight:500;line-height:1.2;margin-top:4px;white-space:nowrap">On orders above ₹499</div>
+<div style="font-size:13px;margin-top:3px;font-weight:400">Use code EAT50</div>
+<button onClick="{{bannerOffer}}" style="margin-top:auto;align-self:flex-start;height:32px;padding:0 14px;border-radius:8px;border:none;background:#E73F1E;color:#fff;font-family:Poppins,sans-serif;font-weight:500;font-size:13px">View offer</button>
+</div>
+</div>
+<div style="flex:0 0 100%;scroll-snap-align:start;height:156px;border-radius:18px;position:relative;overflow:hidden;background:#121212">
+<img src="https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?w=600&amp;q=70&amp;auto=format&amp;fit=crop" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+<div style="position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.78) 0%,rgba(0,0,0,.45) 55%,rgba(0,0,0,0) 100%)"></div>
+<div style="position:relative;height:100%;padding:16px 18px;display:flex;flex-direction:column;color:#fff;max-width:70%">
+<div style="font-family:Poppins,sans-serif;font-size:11px;font-weight:500;letter-spacing:1px;color:#fff">12 – 4 PM</div>
+<div style="font-family:Poppins,sans-serif;font-size:21px;font-family:Poppins,sans-serif;font-weight:500;line-height:1.2;margin-top:4px;white-space:nowrap">Lunch combo ₹299</div>
+<div style="font-size:13px;margin-top:3px;font-weight:400">Burger, fries and a drink</div>
+<button onClick="{{bannerCombo}}" style="margin-top:auto;align-self:flex-start;height:32px;padding:0 14px;border-radius:8px;border:none;background:#fff;color:#121212;font-family:Poppins,sans-serif;font-weight:500;font-size:13px">See burgers</button>
+</div>
+</div>
+<div style="flex:0 0 100%;scroll-snap-align:start;height:156px;border-radius:18px;position:relative;overflow:hidden;background:#121212">
+<img src="https://images.unsplash.com/photo-1607013251379-e6eecfffe234?w=600&amp;q=70&amp;auto=format&amp;fit=crop" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+<div style="position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.78) 0%,rgba(0,0,0,.45) 55%,rgba(0,0,0,0) 100%)"></div>
+<div style="position:relative;height:100%;padding:16px 18px;display:flex;flex-direction:column;color:#fff;max-width:70%">
+<div style="font-family:Poppins,sans-serif;font-size:11px;font-weight:500;letter-spacing:1px;color:#fff">NEW THIS WEEK</div>
+<div style="font-family:Poppins,sans-serif;font-size:21px;font-family:Poppins,sans-serif;font-weight:500;line-height:1.2;margin-top:4px;white-space:nowrap">Lamb Smash Burger</div>
+<div style="font-size:13px;margin-top:3px;font-weight:400">Chef's special</div>
+<button onClick="{{bannerNew}}" style="margin-top:auto;align-self:flex-start;height:32px;padding:0 14px;border-radius:8px;border:none;background:#E73F1E;color:#fff;font-family:Poppins,sans-serif;font-weight:500;font-size:13px">Add now</button>
+</div>
+</div>
+</div>
+<div style="display:flex;justify-content:center;gap:5px;padding-bottom:4px">
+<span style="height:6px;border-radius:3px;transition:all .3s;width:{{dot0w}};background:{{dot0}}"></span>
+<span style="height:6px;border-radius:3px;transition:all .3s;width:{{dot1w}};background:{{dot1}}"></span>
+<span style="height:6px;border-radius:3px;transition:all .3s;width:{{dot2w}};background:{{dot2}}"></span>
+</div>
+</div>
+
+<div ref="{{markRef}}"></div>
+<div ref="{{stickyRef}}" style="position:sticky;top:0;z-index:5;background:#fff;padding-top:10px;box-shadow:{{stickyShadow}}">
+<div style="margin:0 16px;height:52px;border-radius:14px;background:rgba(18,18,18,.05);display:flex;align-items:center;padding:0 4px 0 16px;gap:10px">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#121212" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg>
+<input value="{{q}}" onChange="{{onQ}}" placeholder="Search dishes, ingredients…" aria-label="Search the menu" style="flex:1;min-width:0;border:none;background:transparent;font-size:16px;outline:none;color:#121212">
+<sc-if value="{{hasQ}}"><button onClick="{{clearQ}}" aria-label="Clear search" style="width:28px;height:28px;border-radius:14px;border:none;background:rgba(18,18,18,.12);color:#121212;font-size:16px;line-height:1">×</button></sc-if>
+<span style="width:1px;height:24px;background:rgba(18,18,18,.15)"></span>
+<button onClick="{{startVoice}}" aria-label="Search by voice" style="width:44px;height:44px;border:none;background:transparent;display:flex;align-items:center;justify-content:center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#E73F1E" stroke-width="2.2" stroke-linecap="round"><rect x="9" y="3" width="6" height="12" rx="3"></rect><path d="M5 11a7 7 0 0 0 14 0M12 18v3"></path></svg></button>
+</div>
+<div style="display:flex;gap:8px;overflow-x:auto;padding:12px 16px 10px">
+<sc-for list="{{chips}}" as="c" hint-placeholder-count="5">
+<button onClick="{{c.toggle}}" aria-pressed="{{c.active}}" style="flex:none;height:38px;padding:0 14px;border-radius:12px;border:1px solid {{c.border}};background:{{c.bg}};color:{{c.fg}};font-size:14px;font-family:Poppins,sans-serif;font-weight:500;display:flex;align-items:center;gap:7px;white-space:nowrap">
+<sc-if value="{{c.isVeg}}"><span style="width:14px;height:14px;border:1.5px solid {{vegC}};border-radius:3px;display:inline-flex;align-items:center;justify-content:center;background:#fff"><span style="width:6px;height:6px;border-radius:50%;background:{{vegC}}"></span></span></sc-if>
+<sc-if value="{{c.isNon}}"><span style="width:14px;height:14px;border:1.5px solid {{nonC}};border-radius:3px;display:inline-flex;align-items:center;justify-content:center;background:#fff"><span style="width:0;height:0;border-left:4px solid transparent;border-right:4px solid transparent;border-bottom:7px solid {{nonC}}"></span></span></sc-if>
+{{c.label}}</button>
+</sc-for>
+</div>
+<div style="display:flex;gap:22px;overflow-x:auto;padding:0 16px;border-bottom:1px solid rgba(18,18,18,.08)">
+<sc-for list="{{cats}}" as="t" hint-placeholder-count="6">
+<button onClick="{{t.go}}" style="flex:none;height:42px;border:none;background:none;padding:0;font-size:15px;white-space:nowrap;font-family:Poppins,sans-serif;font-weight:{{t.weight}};color:{{t.fg}};border-bottom:3px solid {{t.line}}">{{t.name}}</button>
+</sc-for>
+</div>
+</div>
+
+<div style="padding:20px 16px 0;display:flex;align-items:center;justify-content:space-between">
+<div style="font-family:Poppins,sans-serif;font-weight:600;font-size:18px">Deal of the day</div>
+<div style="display:flex;align-items:center;gap:6px;font-size:12px;font-weight:400;color:rgba(18,18,18,.6)">Ends in<span ref="{{dealClockRef}}" style="font-family:Poppins,sans-serif;font-weight:500;font-size:12px;color:#fff;background:#121212;border-radius:6px;padding:3px 7px">{{dealClock}}</span></div>
+</div>
+<div style="display:flex;gap:12px;overflow-x:auto;padding:12px 16px 8px">
+<sc-for list="{{deals}}" as="it" hint-placeholder-count="3">
+<div style="flex:0 0 148px;width:148px;min-width:0;display:flex;flex-direction:column">
+<div onClick="{{it.open}}" style="position:relative;height:120px;border-radius:14px;overflow:hidden;background:#f3efed"><div role="img" aria-label="{{it.name}}" style="position:absolute;inset:0;background-size:cover;background-position:center;background-image:{{it.bg}}"></div><span style="position:absolute;top:8px;left:8px;background:#E73F1E;color:#fff;font-family:Poppins,sans-serif;font-weight:600;font-size:11px;line-height:1;padding:5px 7px;border-radius:6px">{{it.off}}</span></div>
+<div style="font-family:Poppins,sans-serif;font-weight:500;font-size:14px;line-height:20px;height:20px;margin-top:8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{it.name}}</div>
+<div style="display:flex;align-items:baseline;gap:6px;height:20px"><span style="font-family:Poppins,sans-serif;font-weight:500;font-size:14px">{{it.price}}</span><span style="font-size:12px;font-weight:400;color:rgba(18,18,18,.45);text-decoration:line-through">{{it.mrp}}</span></div>
+<div style="margin-top:8px;height:36px">
+<sc-if value="{{it.showAdd}}"><button onClick="{{it.add}}" style="width:100%;height:36px;border-radius:10px;border:1px solid rgba(18,18,18,.14);background:#fff;color:#E73F1E;font-family:Poppins,sans-serif;font-weight:600;font-size:14px">ADD</button></sc-if>
+<sc-if value="{{it.showStep}}"><div style="width:100%;height:36px;border-radius:10px;background:#E73F1E;display:flex;align-items:center;justify-content:space-between;color:#fff"><button onClick="{{it.dec}}" aria-label="Remove one" style="width:40px;height:36px;border:none;background:none;color:#fff;font-size:18px">−</button><span style="font-family:Poppins,sans-serif;font-weight:600;font-size:14px">{{it.qty}}</span><button onClick="{{it.inc}}" aria-label="Add one" style="width:40px;height:36px;border:none;background:none;color:#fff;font-size:18px">+</button></div></sc-if>
+</div>
+</div>
+</sc-for>
+</div>
+<sc-for list="{{sections}}" as="s" hint-placeholder-count="2">
+<div data-sec="{{s.id}}" style="padding:20px 16px 8px">
+<div style="font-size:20px;font-family:Poppins,sans-serif;font-weight:600;margin-bottom:14px">{{s.title}}</div>
+<sc-if value="{{isGrid}}" hint-placeholder-val="{{ true }}">
+<div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px 14px">
+<sc-for list="{{s.items}}" as="it" hint-placeholder-count="4">
+<div style="display:flex;flex-direction:column;min-width:0">
+<div onClick="{{it.open}}" style="position:relative;aspect-ratio:1;border-radius:18px;border:1px solid rgba(18,18,18,.08);overflow:hidden;background:#f3efed;display:flex;align-items:center;justify-content:center">
+<div role="img" aria-label="{{it.name}}" style="position:absolute;inset:0;background-size:cover;background-position:center;background-image:{{it.bg}};filter:{{it.imgFilter}}"></div>
+<sc-if value="{{it.unavailable}}"><div style="position:absolute;inset:0;background:rgba(255,255,255,.6);display:flex;align-items:center;justify-content:center;font-size:13px;font-family:Poppins,sans-serif;font-weight:600;text-align:center;padding:12px">Currently unavailable</div></sc-if>
+</div>
+<div style="display:flex;align-items:center;justify-content:space-between;margin-top:10px;gap:4px;height:20px">
+<div style="display:flex;align-items:center;gap:5px;height:20px;line-height:1">
+<sc-if value="{{it.veg}}"><span style="width:14px;height:14px;border:1.5px solid {{vegC}};border-radius:3px;display:inline-flex;align-items:center;justify-content:center;flex:none"><span style="width:6px;height:6px;border-radius:50%;background:{{vegC}}"></span></span></sc-if>
+<sc-if value="{{it.non}}"><span style="width:14px;height:14px;border:1.5px solid {{nonC}};border-radius:3px;display:inline-flex;align-items:center;justify-content:center;flex:none"><span style="width:0;height:0;border-left:4px solid transparent;border-right:4px solid transparent;border-bottom:7px solid {{nonC}}"></span></span></sc-if>
+<sc-if value="{{it.best}}"><span style="display:inline-flex;align-items:center;height:20px;line-height:1;color:#E73F1E;font-size:11px;font-family:Poppins,sans-serif;font-weight:500">Bestseller</span></sc-if>
+</div>
+<span style="display:inline-flex;align-items:center;gap:3px;height:20px;line-height:1;font-size:11px;font-family:Poppins,sans-serif;font-weight:500;background:rgba(18,18,18,.06);border-radius:5px;padding:0 6px;white-space:nowrap"><span style="color:#E73F1E;font-size:10px;font-weight:400">★</span>{{it.rating}}</span>
+</div>
+<div style="font-size:15px;font-family:Poppins,sans-serif;font-weight:500;line-height:20px;height:40px;margin-top:6px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">{{it.name}}</div>
+<div style="font-size:12px;line-height:16px;height:32px;color:rgba(18,18,18,.6);margin-top:4px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;font-weight:400">{{it.desc}}</div>
+<div style="display:flex;align-items:flex-start;justify-content:space-between;margin-top:12px;gap:6px;height:56px">
+<div style="display:flex;flex-direction:column;justify-content:center;height:40px"><div style="font-size:15px;font-family:Poppins,sans-serif;font-weight:500;line-height:1.2">{{it.price}}</div><sc-if value="{{it.hasMrp}}"><div style="font-size:12px;color:rgba(18,18,18,.45);text-decoration:line-through;line-height:1.2;font-weight:400">{{it.mrp}}</div></sc-if></div>
+<div style="display:flex;flex-direction:column;align-items:center;gap:3px;width:88px">
+<sc-if value="{{it.showAdd}}"><button onClick="{{it.add}}" style="width:88px;height:40px;border-radius:12px;border:1px solid rgba(18,18,18,.14);background:#fff;color:#E73F1E;font-family:Poppins,sans-serif;font-weight:600;font-size:16px;box-shadow:0 2px 6px rgba(18,18,18,.06)">ADD</button></sc-if>
+<sc-if value="{{it.showStep}}"><div style="width:88px;height:40px;border-radius:12px;background:#E73F1E;display:flex;align-items:center;justify-content:space-between;color:#fff"><button onClick="{{it.dec}}" aria-label="Remove one" style="width:30px;height:40px;border:none;background:none;color:#fff;font-size:20px;font-family:Poppins,sans-serif;font-weight:600">−</button><span style="font-size:16px;font-family:Poppins,sans-serif;font-weight:600">{{it.qty}}</span><button onClick="{{it.inc}}" aria-label="Add one" style="width:30px;height:40px;border:none;background:none;color:#fff;font-size:20px;font-family:Poppins,sans-serif;font-weight:600">+</button></div></sc-if>
+<sc-if value="{{it.unavailable}}"><div style="width:88px;height:40px;border-radius:10px;background:rgba(18,18,18,.05);display:flex;align-items:center;justify-content:center;font-size:12px;color:rgba(18,18,18,.5);font-weight:400">Sold out</div></sc-if>
+<span style="height:13px;font-size:10px;line-height:13px;color:rgba(18,18,18,.5);font-weight:400">{{it.customText}}</span>
+</div>
+</div>
+</div>
+</sc-for>
+</div>
+</sc-if>
+<sc-if value="{{isList}}">
+<div style="display:flex;flex-direction:column">
+<sc-for list="{{s.items}}" as="it">
+<div style="display:flex;gap:14px;padding:18px 0 26px;border-bottom:1px solid rgba(18,18,18,.08)">
+<div style="flex:1;min-width:0">
+<div style="display:flex;align-items:center;gap:6px;height:20px;line-height:1">
+<sc-if value="{{it.veg}}"><span style="width:14px;height:14px;border:1.5px solid {{vegC}};border-radius:3px;display:inline-flex;align-items:center;justify-content:center;flex:none"><span style="width:6px;height:6px;border-radius:50%;background:{{vegC}}"></span></span></sc-if>
+<sc-if value="{{it.non}}"><span style="width:14px;height:14px;border:1.5px solid {{nonC}};border-radius:3px;display:inline-flex;align-items:center;justify-content:center;flex:none"><span style="width:0;height:0;border-left:4px solid transparent;border-right:4px solid transparent;border-bottom:7px solid {{nonC}}"></span></span></sc-if>
+<sc-if value="{{it.best}}"><span style="display:inline-flex;align-items:center;height:20px;line-height:1;color:#E73F1E;font-size:11px;font-family:Poppins,sans-serif;font-weight:500">Bestseller</span></sc-if>
+</div>
+<div style="font-size:16px;font-family:Poppins,sans-serif;font-weight:500;line-height:20px;height:20px;margin-top:6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{it.name}}</div>
+<div style="display:flex;align-items:baseline;gap:6px;margin-top:4px"><span style="font-size:16px;font-family:Poppins,sans-serif;font-weight:600">{{it.price}}</span><sc-if value="{{it.hasMrp}}"><span style="font-size:13px;color:rgba(18,18,18,.45);text-decoration:line-through;font-weight:400">{{it.mrp}}</span></sc-if></div>
+<div style="display:flex;align-items:center;gap:3px;font-size:13px;font-family:Poppins,sans-serif;font-weight:500;margin-top:6px;height:18px;line-height:1"><span style="color:#E73F1E">★</span>{{it.rating}}</div>
+<div style="font-size:13px;line-height:18px;height:36px;color:rgba(18,18,18,.6);margin-top:6px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;font-weight:400">{{it.desc}}</div>
+</div>
+<div style="position:relative;width:128px;flex:none">
+<div onClick="{{it.open}}" style="position:relative;width:128px;height:128px;border-radius:18px;overflow:hidden;background:#f3efed;display:flex;align-items:center;justify-content:center"><div role="img" aria-label="{{it.name}}" style="position:absolute;inset:0;background-size:cover;background-position:center;background-image:{{it.bg}};filter:{{it.imgFilter}}"></div><sc-if value="{{it.unavailable}}"><div style="position:absolute;inset:0;background:rgba(255,255,255,.75);display:flex;align-items:center;justify-content:center;font-size:12px;font-family:Poppins,sans-serif;font-weight:600;text-align:center;padding:10px">Currently unavailable</div></sc-if></div>
+<div style="position:absolute;left:0;right:0;top:108px;display:flex;flex-direction:column;align-items:center;gap:3px">
+<sc-if value="{{it.showAdd}}"><button onClick="{{it.add}}" style="width:100px;height:40px;border-radius:12px;border:1px solid rgba(18,18,18,.14);background:#fff;color:#E73F1E;font-family:Poppins,sans-serif;font-weight:600;font-size:16px;box-shadow:0 3px 10px rgba(18,18,18,.1)">ADD</button></sc-if>
+<sc-if value="{{it.showStep}}"><div style="width:100px;height:40px;border-radius:12px;background:#E73F1E;display:flex;align-items:center;justify-content:space-between;color:#fff"><button onClick="{{it.dec}}" aria-label="Remove one" style="width:34px;height:40px;border:none;background:none;color:#fff;font-size:20px;font-family:Poppins,sans-serif;font-weight:600">−</button><span style="font-size:16px;font-family:Poppins,sans-serif;font-weight:600">{{it.qty}}</span><button onClick="{{it.inc}}" aria-label="Add one" style="width:34px;height:40px;border:none;background:none;color:#fff;font-size:20px;font-family:Poppins,sans-serif;font-weight:600">+</button></div></sc-if>
+<span style="height:13px;font-size:10px;line-height:13px;color:rgba(18,18,18,.5);font-weight:400">{{it.customText}}</span>
+</div>
+</div>
+</div>
+</sc-for>
+</div>
+</sc-if>
+</div>
+</sc-for>
+
+<sc-if value="{{noResults}}">
+<div style="padding:48px 32px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:10px">
+<div style="font-size:18px;font-family:Poppins,sans-serif;font-weight:600">No dishes match</div>
+<div style="font-size:14px;color:rgba(18,18,18,.6)">Try another word or remove a filter.</div>
+<button onClick="{{clearAll}}" style="margin-top:6px;height:44px;padding:0 20px;border-radius:12px;border:1.5px solid #121212;background:#fff;font-family:Poppins,sans-serif;font-weight:600;font-size:15px">Clear search and filters</button>
+</div>
+</sc-if>
+<div style="padding:24px 16px 240px;text-align:center;font-size:12px;color:rgba(18,18,18,.4);font-weight:400">Prices exclude 5% GST</div>
+</div>
+
+<div style="position:absolute;left:0;right:0;bottom:0;z-index:10;padding:0 12px 24px;display:flex;flex-direction:column;gap:8px;pointer-events:none">
+<button onClick="{{toggleCatMenu}}" aria-label="Browse menu categories" style="pointer-events:auto;align-self:flex-end;width:64px;height:64px;border-radius:32px;border:none;background:#121212;color:#fff;font-size:11px;font-family:Poppins,sans-serif;font-weight:600;letter-spacing:.5px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;box-shadow:0 6px 18px rgba(0,0,0,.25)"><span style="width:18px;height:2px;background:#fff"></span><span style="width:18px;height:2px;background:#fff"></span>MENU</button>
+<sc-if value="{{showOfferStrip}}">
+<div style="pointer-events:auto;background:#fff;border-radius:16px;box-shadow:0 4px 20px rgba(0,0,0,.12);padding:10px 14px;display:flex;align-items:center;gap:12px">
+<svg width="34" height="34" viewBox="0 0 34 34" style="flex:none;transform:rotate(-90deg)"><circle cx="17" cy="17" r="14" fill="none" stroke="rgba(18,18,18,.1)" stroke-width="4"></circle><circle cx="17" cy="17" r="14" fill="none" stroke="#E73F1E" stroke-width="4" stroke-linecap="round" stroke-dasharray="{{ringDash}}"></circle></svg>
+<div style="font-size:14px;font-family:Poppins,sans-serif;font-weight:500;line-height:1.3">{{offerText}}</div>
+</div>
+</sc-if>
+<sc-if value="{{showTableBar}}">
+<button onClick="{{goTable}}" style="pointer-events:auto;height:52px;border-radius:16px;border:2px solid #fff;background:#E73F1E;box-shadow:0 6px 18px rgba(231,63,30,.3);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 18px;font-size:14px;font-family:Poppins,sans-serif;font-weight:500"><span>{{tableBarText}}</span><span style="font-family:Poppins,sans-serif;font-weight:600">Your table ›</span></button>
+</sc-if>
+<sc-if value="{{hasCart}}">
+<button onClick="{{goCart}}" style="pointer-events:auto;height:60px;border-radius:16px;border:none;background:#E73F1E;color:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 20px;box-shadow:0 6px 18px rgba(231,63,30,.35)">
+<span style="display:flex;flex-direction:column;align-items:flex-start"><span style="font-size:17px;font-family:Poppins,sans-serif;font-weight:600">{{cartCountText}}</span><span style="font-size:12px;font-family:Poppins,sans-serif;font-weight:500">{{cartSubText}} · plus taxes</span></span>
+<span style="font-size:17px;font-family:Poppins,sans-serif;font-weight:600">View cart ›</span>
+</button>
+</sc-if>
+</div>
+
+<sc-if value="{{catMenu}}">
+<div onClick="{{toggleCatMenu}}" style="position:absolute;inset:0;z-index:20;background:rgba(0,0,0,.35)"></div>
+<div style="position:absolute;right:16px;bottom:180px;z-index:21;width:250px;background:#121212;border-radius:18px;padding:8px;animation:fadeIn .2s">
+<sc-for list="{{cats}}" as="t">
+<button onClick="{{t.goClose}}" style="width:100%;height:44px;border:none;background:none;color:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 12px;font-size:15px;font-family:Poppins,sans-serif;font-weight:{{t.weight}}"><span>{{t.name}}</span><span style="opacity:.7">{{t.count}}</span></button>
+</sc-for>
+</div>
+</sc-if>
+</sc-if>
+
+<sc-if value="{{isCart}}">
+<div style="position:absolute;top:{{topOff}};left:0;right:0;bottom:0;display:flex;flex-direction:column;background:#f5f4f3">
+<div style="height:60px;background:#fff;display:flex;align-items:center;gap:8px;padding:0 8px;border-bottom:1px solid rgba(18,18,18,.06)">
+<button onClick="{{goMenu}}" aria-label="Back to menu" style="width:44px;height:44px;border:none;background:none;display:flex;align-items:center;justify-content:center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#121212" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"></path></svg></button>
+<div><div style="font-size:18px;font-family:Poppins,sans-serif;font-weight:600">Your order</div><div style="font-size:13px;color:rgba(18,18,18,.6);font-weight:400">{{contextLabel}}</div></div>
+</div>
+<div style="flex:1;overflow-y:auto;padding:14px 16px 24px;display:flex;flex-direction:column;gap:12px">
+<div style="background:#121212;color:#fff;border-radius:18px;padding:14px 16px;display:flex;align-items:center;gap:12px">
+<div style="width:40px;height:40px;border-radius:12px;background:#E73F1E;display:flex;align-items:center;justify-content:center;font-family:Poppins,sans-serif;font-weight:600;font-size:14px;flex:none">{{contextShort}}</div>
+<div><div style="font-size:15px;font-family:Poppins,sans-serif;font-weight:600">{{cartContextTitle}}</div><div style="font-size:12px;opacity:.75;margin-top:2px;font-weight:400">{{cartContextSub}}</div></div>
+</div>
+<sc-if value="{{cartEmpty}}">
+<div style="background:#fff;border-radius:18px;padding:32px 20px;text-align:center"><div style="font-size:17px;font-family:Poppins,sans-serif;font-weight:600">Your cart is empty</div><button onClick="{{goMenu}}" style="margin-top:14px;height:44px;padding:0 20px;border-radius:12px;border:none;background:#E73F1E;color:#fff;font-family:Poppins,sans-serif;font-weight:600;font-size:15px">Browse menu</button></div>
+</sc-if>
+<sc-if value="{{hasCart}}">
+<div style="background:#fff;border-radius:18px;padding:6px 16px">
+<sc-for list="{{lines}}" as="l">
+<div style="display:flex;align-items:flex-start;gap:10px;padding:14px 0;border-bottom:1px solid rgba(18,18,18,.06)">
+<div style="padding-top:3px">
+<sc-if value="{{l.veg}}"><span style="width:14px;height:14px;border:1.5px solid {{vegC}};border-radius:3px;display:inline-flex;align-items:center;justify-content:center"><span style="width:6px;height:6px;border-radius:50%;background:{{vegC}}"></span></span></sc-if>
+<sc-if value="{{l.non}}"><span style="width:14px;height:14px;border:1.5px solid {{nonC}};border-radius:3px;display:inline-flex;align-items:center;justify-content:center"><span style="width:0;height:0;border-left:4px solid transparent;border-right:4px solid transparent;border-bottom:7px solid {{nonC}}"></span></span></sc-if>
+</div>
+<div style="flex:1;min-width:0"><div style="font-size:15px;font-family:Poppins,sans-serif;font-weight:500">{{l.name}}</div><sc-if value="{{l.hasOpts}}"><div style="font-size:12px;color:rgba(18,18,18,.55);margin-top:2px;font-weight:400">{{l.opts}}</div></sc-if><div style="font-size:13px;color:rgba(18,18,18,.6);margin-top:4px;font-weight:400">{{l.unit}} each</div></div>
+<div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px">
+<div style="width:84px;height:34px;border-radius:10px;border:1px solid rgba(18,18,18,.14);display:flex;align-items:center;justify-content:space-between;color:#E73F1E"><button onClick="{{l.dec}}" aria-label="Remove one" style="width:28px;height:34px;border:none;background:none;color:#E73F1E;font-size:18px;font-family:Poppins,sans-serif;font-weight:600">−</button><span style="font-family:Poppins,sans-serif;font-weight:600;font-size:14px">{{l.qty}}</span><button onClick="{{l.inc}}" aria-label="Add one" style="width:28px;height:34px;border:none;background:none;color:#E73F1E;font-size:18px;font-family:Poppins,sans-serif;font-weight:600">+</button></div>
+<div style="font-size:14px;font-family:Poppins,sans-serif;font-weight:600">{{l.total}}</div>
+</div>
+</div>
+</sc-for>
+<button onClick="{{goMenu}}" style="height:48px;border:none;background:none;color:#E73F1E;font-family:Poppins,sans-serif;font-weight:600;font-size:14px;padding:0">+ Add more items</button>
+</div>
+<textarea value="{{note}}" onChange="{{onNote}}" placeholder="Cooking instructions (e.g. less oil, no onion)" rows="2" style="background:#fff;border:none;border-radius:18px;padding:14px 16px;font-size:14px;resize:none;outline:none;color:#121212"></textarea>
+<div style="background:#fff;border-radius:18px;padding:14px 16px;display:flex;align-items:center;gap:12px">
+<div style="width:40px;height:40px;border-radius:12px;background:#FDECE8;color:#E73F1E;font-family:Poppins,sans-serif;font-weight:600;font-size:18px;display:flex;align-items:center;justify-content:center;flex:none">%</div>
+<div style="flex:1"><div style="font-size:15px;font-family:Poppins,sans-serif;font-weight:600">EAT50 · Flat ₹50 off</div><div style="font-size:12px;color:rgba(18,18,18,.6);margin-top:2px;font-weight:400">{{couponSub}}</div></div>
+<button onClick="{{toggleCoupon}}" style="height:36px;padding:0 14px;border-radius:10px;border:1.5px solid {{couponBorder}};background:#fff;color:{{couponFg}};font-family:Poppins,sans-serif;font-weight:600;font-size:13px">{{couponBtn}}</button>
+</div>
+<sc-if value="{{loggedIn}}">
+<div style="background:#fff;border-radius:18px;padding:14px 16px;display:flex;align-items:center;gap:12px">
+<div style="width:40px;height:40px;border-radius:20px;background:#E73F1E;color:#fff;font-family:Poppins,sans-serif;font-weight:600;font-size:16px;display:flex;align-items:center;justify-content:center;flex:none">{{userInitial}}</div>
+<div style="flex:1;min-width:0"><div style="font-family:Poppins,sans-serif;font-weight:500;font-size:15px">{{userName}}</div><div style="font-size:12px;font-weight:400;color:rgba(18,18,18,.6);margin-top:2px">Updates on WhatsApp · {{userPhone}}</div></div>
+<button onClick="{{goProfile}}" style="height:36px;padding:0 12px;border-radius:10px;border:none;background:rgba(18,18,18,.06);color:#121212;font-family:Poppins,sans-serif;font-weight:500;font-size:13px">Change</button>
+</div>
+</sc-if>
+<div style="background:#fff;border-radius:18px;padding:16px;display:flex;flex-direction:column;gap:9px">
+<div style="font-size:15px;font-family:Poppins,sans-serif;font-weight:600;margin-bottom:2px">Bill details</div>
+<sc-for list="{{billRows}}" as="r"><div style="display:flex;justify-content:space-between;font-size:14px;color:{{r.fg}}"><span>{{r.label}}</span><span>{{r.value}}</span></div></sc-for>
+<div style="height:1px;background:rgba(18,18,18,.08);margin:4px 0"></div>
+<div style="display:flex;justify-content:space-between;font-size:16px;font-family:Poppins,sans-serif;font-weight:600"><span>{{totalLabel}}</span><span>{{cartTotal}}</span></div>
+<div style="font-size:12px;color:rgba(18,18,18,.55);line-height:1.4;font-weight:400">{{totalNote}}</div>
+</div>
+</sc-if>
+</div>
+<sc-if value="{{hasCart}}">
+<div style="background:#fff;padding:12px 16px 28px;border-top:1px solid rgba(18,18,18,.06)">
+<button onClick="{{openConfirm}}" style="width:100%;height:56px;border-radius:16px;border:none;background:#E73F1E;color:#fff;font-size:17px;font-family:Poppins,sans-serif;font-weight:600;display:flex;align-items:center;justify-content:space-between;padding:0 20px"><span>{{cartTotal}}</span><span>Place order ›</span></button>
+</div>
+</sc-if>
+</div>
+</sc-if>
+
+<sc-if value="{{isTrack}}">
+<div style="position:absolute;top:{{topOff}};left:0;right:0;bottom:0;display:flex;flex-direction:column;background:#f5f4f3">
+<div style="height:60px;background:#fff;display:flex;align-items:center;gap:8px;padding:0 16px 0 8px;border-bottom:1px solid rgba(18,18,18,.06)">
+<button onClick="{{goMenu}}" aria-label="Back to menu" style="width:44px;height:44px;border:none;background:none;display:flex;align-items:center;justify-content:center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#121212" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"></path></svg></button>
+<div style="flex:1"><div style="font-size:18px;font-family:Poppins,sans-serif;font-weight:600">Order #{{tr.no}}</div><div style="font-size:13px;color:rgba(18,18,18,.6);font-weight:400">{{tr.sub}}</div></div>
+<div style="display:flex;align-items:center;gap:6px;font-size:12px;font-family:Poppins,sans-serif;font-weight:600;color:#E73F1E"><span style="width:7px;height:7px;border-radius:50%;background:#E73F1E"></span>Live</div>
+</div>
+<div style="flex:1;overflow-y:auto;padding:14px 16px 24px;display:flex;flex-direction:column;gap:12px">
+<div style="background:#fff;border-radius:22px;padding:24px 20px 22px;text-align:center">
+<div style="height:110px;display:flex;align-items:center;justify-content:center">{{trackAnim}}</div>
+<div style="font-size:22px;font-family:Poppins,sans-serif;font-weight:600;margin-top:8px;text-wrap:pretty">{{tr.title}}</div>
+<div style="font-size:14px;line-height:1.45;color:rgba(18,18,18,.65);margin-top:6px;text-wrap:pretty">{{tr.desc}}</div>
+<sc-if value="{{tr.showPickup}}">
+<div style="margin-top:16px;border:2px dashed #E73F1E;border-radius:16px;padding:12px"><div style="font-size:12px;font-family:Poppins,sans-serif;font-weight:600;color:rgba(18,18,18,.6);letter-spacing:1px">PICKUP CODE · COUNTER 2</div><div style="font-size:36px;font-family:Poppins,sans-serif;font-weight:600;letter-spacing:6px;color:#E73F1E">{{tr.code}}</div></div>
+</sc-if>
+<sc-if value="{{tr.rejected}}"><button onClick="{{restoreRejected}}" style="margin-top:16px;height:48px;padding:0 22px;border-radius:14px;border:none;background:#E73F1E;color:#fff;font-family:Poppins,sans-serif;font-weight:600;font-size:15px">Back to cart with these items</button></sc-if>
+</div>
+<div style="background:#fff;border-radius:18px;padding:18px 16px">
+<sc-for list="{{tr.steps}}" as="st">
+<div style="display:flex;gap:12px">
+<div style="display:flex;flex-direction:column;align-items:center;width:16px">
+<span style="width:16px;height:16px;border-radius:50%;background:{{st.dot}};border:2px solid {{st.ring}};flex:none"></span>
+<sc-if value="{{st.notLast}}"><span style="width:2px;flex:1;min-height:24px;background:{{st.line}}"></span></sc-if>
+</div>
+<div style="flex:1;display:flex;justify-content:space-between;padding-bottom:14px;margin-top:-2px"><span style="font-size:15px;font-weight:{{st.weight}};color:{{st.fg}}">{{st.label}}</span><span style="font-size:12px;color:rgba(18,18,18,.5);font-weight:400">{{st.time}}</span></div>
+</div>
+</sc-for>
+</div>
+<div style="background:#fff;border-radius:18px;padding:16px;display:flex;flex-direction:column;gap:8px">
+<div style="font-size:15px;font-family:Poppins,sans-serif;font-weight:600">Items</div>
+<sc-for list="{{tr.lines}}" as="l"><div style="display:flex;justify-content:space-between;font-size:14px;gap:10px"><span>{{l.qty}} × {{l.name}}<span style="color:rgba(18,18,18,.5)">{{l.opts}}</span></span><span>{{l.total}}</span></div></sc-for>
+<div style="height:1px;background:rgba(18,18,18,.08);margin:4px 0"></div>
+<div style="display:flex;justify-content:space-between;font-size:15px;font-family:Poppins,sans-serif;font-weight:600"><span>{{tr.totalLabel}}</span><span>{{tr.total}}</span></div>
+<div style="display:flex;justify-content:space-between;align-items:center;font-size:13px;margin-top:4px;font-weight:400"><span style="color:rgba(18,18,18,.6)">Payment</span><span style="font-family:Poppins,sans-serif;font-weight:600;padding:4px 10px;border-radius:999px;background:{{tr.payBg}};color:{{tr.payFg}}">{{tr.payLabel}}</span></div>
+</div>
+</div>
+<div style="background:#fff;padding:12px 16px 28px;border-top:1px solid rgba(18,18,18,.06);display:flex;gap:10px">
+<button onClick="{{goMenu}}" style="flex:1;height:54px;border-radius:16px;border:1.5px solid #121212;background:#fff;color:#121212;font-size:16px;font-family:Poppins,sans-serif;font-weight:600">{{tr.moreLabel}}</button>
+<sc-if value="{{trUpi}}"><a href="{{trUpiLink}}" onClick="{{trPay}}" target="_top" style="flex:1.3;height:54px;border-radius:16px;background:#E73F1E;color:#fff;font-size:15px;font-family:Poppins,sans-serif;font-weight:600;display:flex;align-items:center;justify-content:center;text-decoration:none">Pay {{tr.total}} via UPI</a></sc-if>
+<sc-if value="{{trUpiWait}}"><button onClick="{{trPaid}}" style="flex:1.3;height:54px;border-radius:16px;border:none;background:#E73F1E;color:#fff;font-size:15px;font-family:Poppins,sans-serif;font-weight:600">I've paid</button></sc-if>
+<sc-if value="{{isDine}}"><button onClick="{{goTable}}" style="flex:1;height:54px;border-radius:16px;border:none;background:#121212;color:#fff;font-size:16px;font-family:Poppins,sans-serif;font-weight:600">Your table</button></sc-if>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{isTable}}">
+<div style="position:absolute;top:{{topOff}};left:0;right:0;bottom:0;display:flex;flex-direction:column;background:#f5f4f3">
+<div style="height:60px;background:#fff;display:flex;align-items:center;gap:8px;padding:0 8px;border-bottom:1px solid rgba(18,18,18,.06)">
+<button onClick="{{goMenu}}" aria-label="Back to menu" style="width:44px;height:44px;border:none;background:none;display:flex;align-items:center;justify-content:center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#121212" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"></path></svg></button>
+<div><div style="font-size:18px;font-family:Poppins,sans-serif;font-weight:600">Your table</div><div style="font-size:13px;color:rgba(18,18,18,.6);font-weight:400">Table {{tableNo}} · Smoke House Kitchen</div></div>
+</div>
+<div style="flex:1;overflow-y:auto;padding:14px 16px 24px;display:flex;flex-direction:column;gap:12px">
+<div style="background:#121212;color:#fff;border-radius:22px;padding:20px">
+<div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:13px;font-family:Poppins,sans-serif;font-weight:600;opacity:.75">Current table amount</span><span style="background:#E73F1E;border-radius:999px;padding:4px 10px;font-size:12px;font-family:Poppins,sans-serif;font-weight:600">Table {{tableNo}}</span></div>
+<div style="font-size:38px;font-family:Poppins,sans-serif;font-weight:600;margin-top:6px">{{tb.amount}}</div>
+<div style="font-size:12px;opacity:.7;line-height:1.4;margin-top:2px;font-weight:400">Accepted orders, incl. GST. Your final bill comes from the cashier.</div>
+<div style="height:1px;background:rgba(255,255,255,.15);margin:14px 0 10px"></div>
+<div style="display:flex;justify-content:space-between;font-size:13px;font-weight:400"><span style="opacity:.75">Accepted orders</span><span style="font-family:Poppins,sans-serif;font-weight:600">{{tb.accCount}}</span></div>
+<div style="display:flex;justify-content:space-between;font-size:13px;margin-top:6px;font-weight:400"><span style="opacity:.75">Awaiting confirmation (not billed)</span><span style="font-family:Poppins,sans-serif;font-weight:600">{{tb.pendingAmt}}</span></div>
+</div>
+<sc-if value="{{tb.waiterActive}}"><div style="background:#FDECE8;color:#121212;border-radius:14px;padding:12px 14px;font-size:14px;font-family:Poppins,sans-serif;font-weight:500;display:flex;gap:10px;align-items:center"><span style="width:8px;height:8px;border-radius:50%;background:#E73F1E;flex:none"></span>{{tb.waiterText}}</div></sc-if>
+<sc-if value="{{tb.billRequested}}"><div style="background:#fff;border:1.5px solid #121212;border-radius:14px;padding:12px 14px;font-size:14px;font-family:Poppins,sans-serif;font-weight:500">Bill requested · the cashier is preparing your final bill.</div></sc-if>
+<sc-if value="{{tb.billReady}}"><button onClick="{{goBill}}" style="background:#E73F1E;color:#fff;border:none;border-radius:14px;padding:14px;font-size:15px;font-family:Poppins,sans-serif;font-weight:600;text-align:left;display:flex;justify-content:space-between"><span>Your final bill is ready</span><span>View ›</span></button></sc-if>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+<button onClick="{{openWaiter}}" style="height:54px;border-radius:16px;border:1.5px solid #121212;background:#fff;color:#121212;font-size:15px;font-family:Poppins,sans-serif;font-weight:600">{{tb.waiterBtn}}</button>
+<button onClick="{{askBill}}" style="height:54px;border-radius:16px;border:none;background:{{tb.billBg}};color:#fff;font-size:15px;font-family:Poppins,sans-serif;font-weight:600">{{tb.billBtn}}</button>
+</div>
+<div style="font-size:16px;font-family:Poppins,sans-serif;font-weight:600;margin-top:6px">Orders at this table</div>
+<sc-if value="{{tb.empty}}"><div style="background:#fff;border-radius:18px;padding:24px;text-align:center;font-size:14px;color:rgba(18,18,18,.6)">No orders yet. Anything you order from the menu will appear here.</div></sc-if>
+<sc-for list="{{tb.orders}}" as="o">
+<button onClick="{{o.open}}" style="background:#fff;border:none;border-radius:18px;padding:14px 16px;text-align:left;display:flex;flex-direction:column;gap:6px;color:#121212">
+<div style="display:flex;justify-content:space-between;align-items:center;width:100%"><span style="font-size:15px;font-family:Poppins,sans-serif;font-weight:600">#{{o.no}} · {{o.at}}</span><span style="font-size:12px;font-family:Poppins,sans-serif;font-weight:600;padding:4px 10px;border-radius:999px;background:{{o.chipBg}};color:{{o.chipFg}}">{{o.status}}</span></div>
+<div style="font-size:13px;color:rgba(18,18,18,.6);line-height:1.4;font-weight:400">{{o.items}}</div>
+<div style="font-size:14px;font-family:Poppins,sans-serif;font-weight:600">{{o.amount}}</div>
+</button>
+</sc-for>
+</div>
+<div style="background:#fff;padding:12px 16px 28px;border-top:1px solid rgba(18,18,18,.06)">
+<button onClick="{{goMenu}}" style="width:100%;height:54px;border-radius:16px;border:none;background:#E73F1E;color:#fff;font-size:16px;font-family:Poppins,sans-serif;font-weight:600">Order more</button>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{isBill}}">
+<div style="position:absolute;top:{{topOff}};left:0;right:0;bottom:0;display:flex;flex-direction:column;background:#f5f4f3">
+<div style="height:60px;background:#fff;display:flex;align-items:center;gap:8px;padding:0 8px;border-bottom:1px solid rgba(18,18,18,.06)">
+<button onClick="{{goTable}}" aria-label="Back to table" style="width:44px;height:44px;border:none;background:none;display:flex;align-items:center;justify-content:center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#121212" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"></path></svg></button>
+<div><div style="font-size:18px;font-family:Poppins,sans-serif;font-weight:600">Final bill</div><div style="font-size:13px;color:rgba(18,18,18,.6);font-weight:400">Generated by the restaurant</div></div>
+</div>
+<div style="flex:1;overflow-y:auto;padding:14px 16px 24px">
+<div style="background:#fff;border-radius:20px;padding:22px 18px">
+<div style="text-align:center"><div style="font-size:20px;font-family:Poppins,sans-serif;font-weight:600">Smoke House Kitchen</div><div style="font-size:12px;color:rgba(18,18,18,.55);margin-top:3px;font-weight:400">100 Ft Road, Indiranagar, Bengaluru · GSTIN 29ABCDE1234F1Z5</div></div>
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:16px;padding:12px 0;border-top:1.5px dashed rgba(18,18,18,.2);border-bottom:1.5px dashed rgba(18,18,18,.2);font-size:12px;font-weight:400">
+<div><div style="color:rgba(18,18,18,.55)">Bill no.</div><div style="font-family:Poppins,sans-serif;font-weight:600;margin-top:2px">{{bl.no}}</div></div>
+<div><div style="color:rgba(18,18,18,.55)">Table</div><div style="font-family:Poppins,sans-serif;font-weight:600;margin-top:2px">{{tableNo}}</div></div>
+<div><div style="color:rgba(18,18,18,.55)">Time</div><div style="font-family:Poppins,sans-serif;font-weight:600;margin-top:2px">{{bl.at}}</div></div>
+</div>
+<div style="display:flex;flex-direction:column;gap:10px;padding:14px 0">
+<sc-for list="{{bl.lines}}" as="l"><div style="display:flex;justify-content:space-between;gap:10px;font-size:14px"><div><div>{{l.name}} × {{l.qty}}</div><div style="font-size:12px;color:rgba(18,18,18,.5);font-weight:400">{{l.opts}}</div></div><span>{{l.amt}}</span></div></sc-for>
+</div>
+<div style="display:flex;flex-direction:column;gap:7px;padding-top:12px;border-top:1.5px dashed rgba(18,18,18,.2)">
+<sc-for list="{{bl.rows}}" as="r"><div style="display:flex;justify-content:space-between;font-size:13px;color:rgba(18,18,18,.7);font-weight:400"><span>{{r.label}}</span><span>{{r.value}}</span></div></sc-for>
+</div>
+<div style="display:flex;justify-content:space-between;align-items:baseline;margin-top:14px;padding-top:12px;border-top:1.5px solid #121212"><span style="font-size:16px;font-family:Poppins,sans-serif;font-weight:600">Amount payable</span><span style="font-size:26px;font-family:Poppins,sans-serif;font-weight:600">{{bl.total}}</span></div>
+<div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px;font-size:13px;font-weight:400"><span style="color:rgba(18,18,18,.6)">Payment status</span><span style="font-family:Poppins,sans-serif;font-weight:600;padding:5px 12px;border-radius:999px;background:{{bl.payBg}};color:{{bl.payFg}}">{{bl.payLabel}}</span></div>
+</div>
+</div>
+<div style="background:#fff;padding:12px 16px 28px;border-top:1px solid rgba(18,18,18,.06);display:flex;flex-direction:column;gap:10px">
+<sc-if value="{{bl.canPay}}">
+<div style="display:flex;align-items:center;gap:12px;padding:4px 2px 6px">
+<div role="img" aria-label="UPI QR code" style="width:76px;height:76px;flex:none;border-radius:8px;background-color:#f3efed;background-size:cover;background-image:{{upiQrBg}}"></div>
+<div style="flex:1;min-width:0"><div style="font-family:Poppins,sans-serif;font-weight:500;font-size:14px">Scan with any UPI app</div><div style="font-size:12px;font-weight:400;color:rgba(18,18,18,.6);margin-top:2px">Pay to {{upiId}}</div><button onClick="{{copyUpi}}" style="margin-top:6px;border:none;background:none;padding:0;color:#E73F1E;font-family:Poppins,sans-serif;font-weight:500;font-size:13px">Copy UPI ID</button></div>
+</div>
+<a href="{{upiLink}}" onClick="{{payUPI}}" target="_top" style="height:56px;border-radius:16px;background:#E73F1E;color:#fff;font-size:16px;font-family:Poppins,sans-serif;font-weight:600;display:flex;align-items:center;justify-content:center;text-decoration:none">Pay {{bl.total}} via UPI app</a>
+<button onClick="{{payTable}}" style="height:50px;border-radius:16px;border:1.5px solid #121212;background:#fff;color:#121212;font-size:15px;font-family:Poppins,sans-serif;font-weight:600">Pay at table · card or cash</button>
+</sc-if>
+<sc-if value="{{bl.upiWait}}">
+<div style="font-size:13px;font-weight:400;color:rgba(18,18,18,.65);text-align:center;line-height:1.45">Finish the payment in your UPI app, then come back here.</div>
+<button onClick="{{upiDone}}" style="height:56px;border-radius:16px;border:none;background:#E73F1E;color:#fff;font-size:16px;font-family:Poppins,sans-serif;font-weight:600">I've completed the payment</button>
+<a href="{{upiLink}}" target="_top" style="height:46px;border-radius:14px;border:1.5px solid #121212;color:#121212;font-size:14px;font-family:Poppins,sans-serif;font-weight:500;display:flex;align-items:center;justify-content:center;text-decoration:none">Open UPI app again</a>
+</sc-if>
+<sc-if value="{{bl.busy}}"><div style="height:56px;border-radius:16px;background:#121212;color:#fff;display:flex;align-items:center;justify-content:center;font-size:15px;font-family:Poppins,sans-serif;font-weight:600;text-align:center;padding:0 16px">{{bl.payText}}</div></sc-if>
+<sc-if value="{{bl.paid}}"><button onClick="{{goThanks}}" style="height:56px;border-radius:16px;border:none;background:#E73F1E;color:#fff;font-size:16px;font-family:Poppins,sans-serif;font-weight:600">Payment confirmed · Continue</button></sc-if>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{isThanks}}">
+<div style="position:absolute;top:{{topOff}};left:0;right:0;bottom:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:32px 28px;text-align:center;background:#fff">
+<div style="width:96px;height:96px;border-radius:50%;background:#E73F1E;display:flex;align-items:center;justify-content:center"><div style="width:22px;height:40px;border-right:6px solid #fff;border-bottom:6px solid #fff;transform:rotate(45deg) translate(-4px,-6px)"></div></div>
+<div style="font-size:30px;font-family:Poppins,sans-serif;font-weight:600;line-height:1.1;margin-top:24px">Thank you for dining with us!</div>
+<div style="font-size:16px;color:rgba(18,18,18,.65);margin-top:10px">We hope to see you again soon.</div>
+<div style="margin-top:22px;background:#f5f4f3;border-radius:16px;padding:12px 18px;font-size:14px;font-family:Poppins,sans-serif;font-weight:500">{{thanksLine}}</div>
+<div style="margin-top:28px;font-size:15px;font-family:Poppins,sans-serif;font-weight:600">Rate your experience</div>
+<div style="display:flex;gap:6px;margin-top:8px">
+<sc-for list="{{stars}}" as="sr"><button onClick="{{sr.set}}" aria-label="{{sr.aria}}" style="width:44px;height:44px;border:none;background:none;font-size:32px;color:{{sr.fg}}">★</button></sc-for>
+</div>
+<sc-if value="{{rated}}"><div style="font-size:13px;color:rgba(18,18,18,.6);margin-top:6px;font-weight:400">Thanks, your rating has been shared with the restaurant.</div></sc-if>
+<button onClick="{{newSession}}" style="margin-top:28px;height:52px;padding:0 28px;border-radius:14px;border:1.5px solid #121212;background:#fff;font-family:Poppins,sans-serif;font-weight:600;font-size:15px">Done</button>
+<div style="margin-top:20px;font-size:12px;color:rgba(18,18,18,.4);font-weight:400">Smoke House Kitchen · Ordering by Ecomeal</div>
+</div>
+</sc-if>
+
+<sc-if value="{{sheetOpen}}">
+<div onClick="{{closeSheet}}" style="position:absolute;inset:0;z-index:40;background:rgba(0,0,0,.5);animation:fadeIn .2s"></div>
+<div role="dialog" aria-label="Customise item" style="position:absolute;left:0;right:0;bottom:0;z-index:41;max-height:88%;background:#fff;border-radius:26px 26px 0 0;display:flex;flex-direction:column;animation:sheetUp .28s ease-out">
+<div style="flex:1;overflow-y:auto">
+<div style="height:170px;margin:12px 12px 0;border-radius:18px;background:#f3efed;position:relative;overflow:hidden"><div style="position:absolute;inset:0;background-size:cover;background-position:center;background-image:{{sh.bg}}"></div></div>
+<div style="padding:16px 18px 6px">
+<div style="font-size:22px;font-family:Poppins,sans-serif;font-weight:600;">{{sh.name}}</div>
+<div style="font-size:14px;line-height:1.45;color:rgba(18,18,18,.6);margin-top:4px">{{sh.desc}}</div>
+<div style="font-size:16px;font-family:Poppins,sans-serif;font-weight:600;margin-top:8px">{{sh.price}}</div>
+</div>
+<sc-for list="{{sh.groups}}" as="g">
+<div style="margin:12px 18px 0;border:1px solid rgba(18,18,18,.1);border-radius:16px;padding:14px 14px 6px">
+<div style="display:flex;justify-content:space-between;align-items:center"><div><div style="font-size:16px;font-family:Poppins,sans-serif;font-weight:600">{{g.name}}</div><div style="font-size:12px;color:rgba(18,18,18,.55);font-weight:400">{{g.hint}}</div></div><span style="font-size:11px;font-family:Poppins,sans-serif;font-weight:600;padding:3px 8px;border-radius:6px;background:{{g.tagBg}};color:{{g.tagFg}}">{{g.tag}}</span></div>
+<sc-for list="{{g.options}}" as="o">
+<button onClick="{{o.pick}}" style="width:100%;height:48px;border:none;background:none;display:flex;align-items:center;justify-content:space-between;padding:0;color:#121212;font-size:15px;font-weight:{{o.fw}}">
+<span>{{o.label}}</span>
+<span style="display:flex;align-items:center;gap:12px"><span style="font-size:14px;color:rgba(18,18,18,.6)">{{o.price}}</span><span style="width:20px;height:20px;border-radius:{{g.radius}};border:2px solid {{o.ind}};display:flex;align-items:center;justify-content:center"><span style="width:10px;height:10px;border-radius:{{g.radius}};background:{{o.dot}}"></span></span></span>
+</button>
+</sc-for>
+</div>
+</sc-for>
+<textarea value="{{sNote}}" onChange="{{onSNote}}" placeholder="Special request for this item (optional)" rows="2" style="display:block;width:calc(100% - 36px);margin:12px 18px 18px;border:1px solid rgba(18,18,18,.1);border-radius:16px;padding:12px 14px;font-size:14px;resize:none;outline:none"></textarea>
+</div>
+<div style="display:flex;gap:12px;padding:12px 16px 28px;border-top:1px solid rgba(18,18,18,.08)">
+<div style="width:110px;height:54px;border-radius:14px;border:1px solid rgba(18,18,18,.14);display:flex;align-items:center;justify-content:space-between;color:#E73F1E;flex:none"><button onClick="{{sDec}}" aria-label="Decrease quantity" style="width:38px;height:54px;border:none;background:none;color:#E73F1E;font-size:22px;font-family:Poppins,sans-serif;font-weight:600">−</button><span style="font-family:Poppins,sans-serif;font-weight:600;font-size:17px">{{sQty}}</span><button onClick="{{sInc}}" aria-label="Increase quantity" style="width:38px;height:54px;border:none;background:none;color:#E73F1E;font-size:22px;font-family:Poppins,sans-serif;font-weight:600">+</button></div>
+<button onClick="{{addFromSheet}}" style="flex:1;height:54px;border-radius:14px;border:none;background:{{sh.btnBg}};color:#fff;font-size:16px;font-family:Poppins,sans-serif;font-weight:600">{{sh.btn}}</button>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{confirm}}">
+<div onClick="{{closeConfirm}}" style="position:absolute;inset:0;z-index:40;background:rgba(0,0,0,.5);animation:fadeIn .2s"></div>
+<div role="dialog" aria-label="Confirm order" style="position:absolute;left:0;right:0;bottom:0;z-index:41;background:#fff;border-radius:26px 26px 0 0;padding:24px 18px 28px;animation:sheetUp .28s ease-out">
+<div style="font-size:22px;font-family:Poppins,sans-serif;font-weight:600;">{{confirmTitle}}</div>
+<div style="font-size:14px;color:rgba(18,18,18,.6);margin-top:6px;line-height:1.45">{{confirmItems}}</div>
+<div style="display:flex;justify-content:space-between;margin-top:16px;padding:14px 0;border-top:1px solid rgba(18,18,18,.08);border-bottom:1px solid rgba(18,18,18,.08);font-size:16px;font-family:Poppins,sans-serif;font-weight:600"><span>{{totalLabel}}</span><span>{{cartTotal}}</span></div>
+<div style="font-size:13px;color:rgba(18,18,18,.6);margin-top:12px;line-height:1.45;font-weight:400">The restaurant will confirm your order in a minute or two.</div>
+<div style="display:flex;gap:10px;margin-top:18px">
+<button onClick="{{closeConfirm}}" style="flex:1;height:54px;border-radius:16px;border:1.5px solid #121212;background:#fff;font-size:16px;font-family:Poppins,sans-serif;font-weight:600">Go back</button>
+<button onClick="{{doPlace}}" style="flex:1.4;height:54px;border-radius:16px;border:none;background:#E73F1E;color:#fff;font-size:16px;font-family:Poppins,sans-serif;font-weight:600">{{placeLabel}}</button>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{waiterOpen}}">
+<div onClick="{{closeWaiter}}" style="position:absolute;inset:0;z-index:40;background:rgba(0,0,0,.5);animation:fadeIn .2s"></div>
+<div role="dialog" aria-label="Call waiter" style="position:absolute;left:0;right:0;bottom:0;z-index:41;background:#fff;border-radius:26px 26px 0 0;padding:24px 18px 28px;animation:sheetUp .28s ease-out">
+<sc-if value="{{waiterForm}}">
+<div style="font-size:22px;font-family:Poppins,sans-serif;font-weight:600;">Call a waiter</div>
+<div style="font-size:14px;color:rgba(18,18,18,.6);margin-top:6px">We'll notify the staff serving Table {{tableNo}}.</div>
+<div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:16px">
+<sc-for list="{{reasons}}" as="r"><button onClick="{{r.pick}}" style="height:42px;padding:0 14px;border-radius:12px;border:1.5px solid {{r.border}};background:{{r.bg}};color:{{r.fg}};font-size:14px;font-family:Poppins,sans-serif;font-weight:600">{{r.label}}</button></sc-for>
+</div>
+<button onClick="{{sendWaiter}}" style="width:100%;margin-top:20px;height:54px;border-radius:16px;border:none;background:#E73F1E;color:#fff;font-size:16px;font-family:Poppins,sans-serif;font-weight:600">{{waiterSubmit}}</button>
+</sc-if>
+<sc-if value="{{waiterDone}}">
+<div style="display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px;padding:8px 0">
+<div style="width:64px;height:64px;border-radius:50%;background:#E73F1E;display:flex;align-items:center;justify-content:center"><div style="width:14px;height:26px;border-right:4px solid #fff;border-bottom:4px solid #fff;transform:rotate(45deg) translate(-2px,-4px)"></div></div>
+<div style="font-size:20px;font-family:Poppins,sans-serif;font-weight:600">Waiter notified</div>
+<div style="font-size:14px;color:rgba(18,18,18,.6)">Someone will assist you shortly.</div>
+<button onClick="{{closeWaiter}}" style="width:100%;margin-top:10px;height:52px;border-radius:16px;border:1.5px solid #121212;background:#fff;font-size:16px;font-family:Poppins,sans-serif;font-weight:600">Done</button>
+</div>
+</sc-if>
+</div>
+</sc-if>
+
+<sc-if value="{{billAsk}}">
+<div onClick="{{closeBillAsk}}" style="position:absolute;inset:0;z-index:40;background:rgba(0,0,0,.5);animation:fadeIn .2s"></div>
+<div role="dialog" aria-label="Request bill" style="position:absolute;left:0;right:0;bottom:0;z-index:41;background:#fff;border-radius:26px 26px 0 0;padding:24px 18px 28px;animation:sheetUp .28s ease-out">
+<div style="font-size:22px;font-family:Poppins,sans-serif;font-weight:600;">Request the final bill?</div>
+<div style="font-size:14px;color:rgba(18,18,18,.6);margin-top:8px;line-height:1.5">The cashier will prepare the bill for Table {{tableNo}} from your accepted orders. {{billPendingNote}}</div>
+<div style="display:flex;gap:10px;margin-top:20px">
+<button onClick="{{closeBillAsk}}" style="flex:1;height:54px;border-radius:16px;border:1.5px solid #121212;background:#fff;font-size:16px;font-family:Poppins,sans-serif;font-weight:600">Not yet</button>
+<button onClick="{{requestBill}}" style="flex:1.4;height:54px;border-radius:16px;border:none;background:#E73F1E;color:#fff;font-size:16px;font-family:Poppins,sans-serif;font-weight:600">Request bill</button>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{listening}}">
+<div onClick="{{stopVoice}}" style="position:absolute;inset:0;z-index:40;background:rgba(0,0,0,.5)"></div>
+<div style="position:absolute;left:0;right:0;bottom:0;z-index:41;background:#fff;border-radius:26px 26px 0 0;padding:28px 18px 32px;text-align:center;animation:sheetUp .25s ease-out">
+<div style="height:100px;display:flex;align-items:center;justify-content:center">{{micAnim}}</div>
+<div style="font-size:20px;font-family:Poppins,sans-serif;font-weight:600;margin-top:6px">Listening…</div>
+<div style="font-size:14px;color:rgba(18,18,18,.6);margin-top:6px">Try “paneer” or “cold coffee”</div>
+<button onClick="{{stopVoice}}" style="margin-top:18px;height:48px;padding:0 24px;border-radius:14px;border:1.5px solid #121212;background:#fff;font-family:Poppins,sans-serif;font-weight:600;font-size:15px">Cancel</button>
+</div>
+</sc-if>
+
+<sc-if value="{{drawer}}">
+<div onClick="{{closeDrawer}}" style="position:absolute;inset:0;z-index:40;background:rgba(0,0,0,.5);animation:fadeIn .2s"></div>
+<div role="dialog" aria-label="Menu" style="position:absolute;left:0;top:0;bottom:0;width:300px;z-index:41;background:#fff;padding:60px 20px 28px;display:flex;flex-direction:column;animation:slideIn .25s ease-out">
+<div style="display:flex;align-items:center;gap:12px">
+<div style="width:48px;height:48px;border-radius:50%;background:#E73F1E;box-shadow:inset 0 0 0 2.5px #E73F1E,inset 0 0 0 4px #fff;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;line-height:1;flex:none"><span style="font-family:Poppins,sans-serif;font-weight:600;font-size:15px;letter-spacing:1px">SH</span><span style="font-family:Poppins,sans-serif;font-weight:500;font-size:5px;letter-spacing:1.2px;margin-top:2px">KITCHEN</span></div>
+<div style="flex:1"><div style="font-family:Poppins,sans-serif;font-weight:600;font-size:17px">Smoke House Kitchen</div><div style="font-size:13px;font-weight:400;color:rgba(18,18,18,.6)">Indiranagar · Open till 11 pm</div></div>
+</div>
+<button onClick="{{openMunchi}}" style="margin-top:18px;height:76px;border-radius:16px;border:none;background:#121212;color:#fff;display:flex;align-items:center;gap:12px;padding:0 14px;text-align:left;overflow:hidden">
+<div style="width:48px;height:56px;border-radius:10px;overflow:hidden;flex:none;background:#333"><img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=120&amp;h=140&amp;q=60&amp;auto=format&amp;fit=crop" alt="" style="width:100%;height:100%;object-fit:cover"></div>
+<div style="flex:1"><div style="display:flex;align-items:center;gap:8px"><span style="font-family:Poppins,sans-serif;font-weight:600;font-size:16px">Munchi</span><span style="background:#E73F1E;border-radius:5px;padding:2px 6px;font-family:Poppins,sans-serif;font-weight:500;font-size:10px">NEW</span></div><div style="font-size:12px;font-weight:400;opacity:.75;margin-top:2px">What's trending · food reels</div></div>
+<span style="font-size:18px">›</span>
+</button>
+<div style="margin-top:16px;background:#FDECE8;border-radius:14px;padding:12px 14px"><div style="font-size:12px;font-family:Poppins,sans-serif;font-weight:600;color:#E73F1E;letter-spacing:.5px">CURRENT SESSION</div><div style="font-size:15px;font-family:Poppins,sans-serif;font-weight:600;margin-top:2px">{{contextLabel}}</div><div style="font-size:12px;color:rgba(18,18,18,.6);margin-top:2px;font-weight:400"><button onClick="{{openSwitch}}" style="border:none;background:none;padding:0;color:#E73F1E;font-size:12px;font-family:Poppins,sans-serif;font-weight:500;text-decoration:underline">Change table or order type</button></div></div>
+<div style="display:flex;flex-direction:column;margin-top:10px">
+<sc-for list="{{drawerItems}}" as="d"><button onClick="{{d.fn}}" style="height:52px;border:none;border-bottom:1px solid rgba(18,18,18,.06);background:none;display:flex;align-items:center;justify-content:space-between;padding:0;color:#121212;font-size:15px;font-family:Poppins,sans-serif;font-weight:500"><span>{{d.label}}</span><span style="font-size:12px;color:rgba(18,18,18,.5);font-weight:400">{{d.sub}}</span></button></sc-for>
+</div>
+<div style="margin-top:auto;font-size:12px;color:rgba(18,18,18,.4);font-weight:400">Ordering by Ecomeal</div>
+</div>
+</sc-if>
+
+<sc-if value="{{isProfile}}">
+<div style="position:absolute;top:{{topOff}};left:0;right:0;bottom:0;display:flex;flex-direction:column;background:#f5f4f3">
+<div style="height:60px;background:#fff;display:flex;align-items:center;gap:8px;padding:0 8px;border-bottom:1px solid rgba(18,18,18,.06)">
+<button onClick="{{goMenu}}" aria-label="Back to menu" style="width:44px;height:44px;border:none;background:none;display:flex;align-items:center;justify-content:center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#121212" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"></path></svg></button>
+<div style="font-family:Poppins,sans-serif;font-weight:600;font-size:18px">Profile</div>
+</div>
+<div style="flex:1;overflow-y:auto;padding:14px 16px 24px;display:flex;flex-direction:column;gap:12px">
+<sc-if value="{{loggedIn}}">
+<div style="background:#121212;color:#fff;border-radius:20px;padding:20px;display:flex;align-items:center;gap:14px">
+<div style="width:56px;height:56px;border-radius:28px;background:#E73F1E;font-family:Poppins,sans-serif;font-weight:600;font-size:22px;display:flex;align-items:center;justify-content:center;flex:none">{{userInitial}}</div>
+<div style="flex:1;min-width:0"><div style="font-family:Poppins,sans-serif;font-weight:600;font-size:19px">{{userName}}</div><div style="font-size:14px;font-weight:400;opacity:.8;margin-top:2px">{{userPhone}}</div><div style="display:inline-flex;margin-top:8px;background:rgba(255,255,255,.12);border-radius:6px;padding:3px 8px;font-size:11px;font-weight:400">WhatsApp verified</div></div>
+</div>
+</sc-if>
+<sc-if value="{{loggedOut}}">
+<div style="background:#fff;border-radius:20px;padding:20px">
+<div style="font-family:Poppins,sans-serif;font-weight:600;font-size:19px">Sign in with WhatsApp</div>
+<div style="font-size:14px;font-weight:400;color:rgba(18,18,18,.65);margin-top:6px;line-height:1.5">Get live order updates and your bill on WhatsApp. Checkout is faster next time.</div>
+<button onClick="{{openOtp}}" style="width:100%;margin-top:16px;height:52px;border-radius:14px;border:none;background:#E73F1E;color:#fff;font-family:Poppins,sans-serif;font-weight:600;font-size:15px">Continue with WhatsApp</button>
+</div>
+</sc-if>
+<div style="background:#fff;border-radius:18px;padding:16px">
+<div style="font-family:Poppins,sans-serif;font-weight:600;font-size:15px;margin-bottom:6px">Today's orders</div>
+<sc-if value="{{noOrders}}"><div style="font-size:14px;font-weight:400;color:rgba(18,18,18,.6);padding:6px 0">No orders yet.</div></sc-if>
+<sc-for list="{{profileOrders}}" as="o"><button onClick="{{o.open}}" style="width:100%;height:52px;border:none;border-top:1px solid rgba(18,18,18,.06);background:none;display:flex;align-items:center;justify-content:space-between;padding:0;color:#121212"><span style="font-family:Poppins,sans-serif;font-weight:500;font-size:14px">#{{o.no}} · {{o.where}}</span><span style="font-size:13px;font-weight:400;color:rgba(18,18,18,.6)">{{o.status}} · {{o.amount}}</span></button></sc-for>
+</div>
+<div style="background:#fff;border-radius:18px;padding:4px 16px">
+<sc-if value="{{loggedIn}}"><button onClick="{{toggleWa}}" style="width:100%;height:56px;border:none;border-bottom:1px solid rgba(18,18,18,.06);background:none;display:flex;align-items:center;justify-content:space-between;padding:0;color:#121212"><span style="font-family:Poppins,sans-serif;font-weight:500;font-size:15px">WhatsApp order updates</span><span style="width:44px;height:26px;border-radius:13px;background:{{waTrack}};position:relative;display:block"><span style="position:absolute;top:3px;left:{{waKnob}};width:20px;height:20px;border-radius:10px;background:#fff;transition:left .2s"></span></span></button></sc-if>
+<button onClick="{{openSwitch}}" style="width:100%;height:56px;border:none;border-bottom:1px solid rgba(18,18,18,.06);background:none;display:flex;align-items:center;justify-content:space-between;padding:0;color:#121212"><span style="font-family:Poppins,sans-serif;font-weight:500;font-size:15px">Table or order type</span><span style="font-size:13px;font-weight:400;color:rgba(18,18,18,.6)">{{contextLabel}}</span></button>
+<button onClick="{{helpToast}}" style="width:100%;height:56px;border:none;background:none;display:flex;align-items:center;justify-content:space-between;padding:0;color:#121212"><span style="font-family:Poppins,sans-serif;font-weight:500;font-size:15px">Help & support</span><span style="font-size:16px">›</span></button>
+</div>
+<sc-if value="{{loggedIn}}"><button onClick="{{logout}}" style="height:50px;border-radius:14px;border:1.5px solid #121212;background:#fff;color:#121212;font-family:Poppins,sans-serif;font-weight:500;font-size:15px">Log out</button></sc-if>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{isMunchi}}">
+<div style="position:absolute;top:{{topOff}};left:0;right:0;bottom:0;z-index:35;background:#000">
+<div ref="{{reelRef}}" onScroll="{{onReelScroll}}" style="position:absolute;inset:0;overflow-y:auto;scroll-snap-type:y mandatory">
+<sc-for list="{{reels}}" as="r">
+<div style="position:relative;height:100%;scroll-snap-align:start;scroll-snap-stop:always;overflow:hidden">
+<div role="img" aria-label="{{r.name}}" style="position:absolute;inset:0;background-size:cover;background-position:center;background-image:{{r.bg}};animation:{{r.anim}}"></div>
+<div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.45) 0%,rgba(0,0,0,0) 22%,rgba(0,0,0,0) 50%,rgba(0,0,0,.85) 100%)"></div>
+<div style="position:absolute;top:66px;left:16px;right:16px;height:3px;border-radius:2px;background:rgba(255,255,255,.3);overflow:hidden"><div style="height:100%;background:#fff;width:{{r.progW}};animation:{{r.prog}}"></div></div>
+<div style="position:absolute;right:10px;bottom:150px;display:flex;flex-direction:column;align-items:center;gap:18px;color:#fff">
+<button onClick="{{r.like}}" aria-label="Like" style="width:48px;border:none;background:none;color:#fff;display:flex;flex-direction:column;align-items:center;gap:4px"><svg width="30" height="30" viewBox="0 0 24 24" fill="{{r.heartFill}}" stroke="{{r.heartStroke}}" stroke-width="2" stroke-linejoin="round"><path d="M12 21s-7-4.5-9.5-9A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9.5 6c-2.5 4.5-9.5 9-9.5 9z"></path></svg><span style="font-family:Poppins,sans-serif;font-weight:500;font-size:12px">{{r.likes}}</span></button>
+<button onClick="{{r.share}}" aria-label="Share" style="width:48px;border:none;background:none;color:#fff;display:flex;flex-direction:column;align-items:center;gap:4px"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 3L10 14M21 3l-7 18-4-7-7-4z"></path></svg><span style="font-family:Poppins,sans-serif;font-weight:500;font-size:12px">Share</span></button>
+</div>
+<div style="position:absolute;left:16px;right:76px;bottom:36px;color:#fff;display:flex;flex-direction:column;gap:6px">
+<div style="display:flex;align-items:center;gap:8px"><span style="width:28px;height:28px;border-radius:14px;background:#E73F1E;font-family:Poppins,sans-serif;font-weight:600;font-size:10px;display:flex;align-items:center;justify-content:center;border:1.5px solid #fff">SH</span><span style="font-family:Poppins,sans-serif;font-weight:500;font-size:13px">smokehousekitchen</span></div>
+<div style="font-size:14px;font-weight:400;line-height:1.4">{{r.caption}}</div>
+<div style="margin-top:6px;background:rgba(255,255,255,.96);color:#121212;border-radius:14px;padding:10px 10px 10px 14px;display:flex;align-items:center;gap:10px">
+<div style="flex:1;min-width:0"><div style="font-family:Poppins,sans-serif;font-weight:500;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{r.name}}</div><div style="font-family:Poppins,sans-serif;font-weight:500;font-size:13px;color:rgba(18,18,18,.65)">{{r.price}}</div></div>
+<div style="width:88px;height:38px;flex:none">
+<sc-if value="{{r.showAdd}}"><button onClick="{{r.add}}" style="width:88px;height:38px;border-radius:10px;border:none;background:#E73F1E;color:#fff;font-family:Poppins,sans-serif;font-weight:600;font-size:14px">ADD</button></sc-if>
+<sc-if value="{{r.showStep}}"><div style="width:88px;height:38px;border-radius:10px;background:#E73F1E;display:flex;align-items:center;justify-content:space-between;color:#fff"><button onClick="{{r.dec}}" aria-label="Remove one" style="width:30px;height:38px;border:none;background:none;color:#fff;font-size:18px">−</button><span style="font-family:Poppins,sans-serif;font-weight:600;font-size:14px">{{r.qty}}</span><button onClick="{{r.inc}}" aria-label="Add one" style="width:30px;height:38px;border:none;background:none;color:#fff;font-size:18px">+</button></div></sc-if>
+</div>
+</div>
+</div>
+</div>
+</sc-for>
+</div>
+<div style="position:absolute;top:0;left:0;right:0;height:60px;display:flex;align-items:center;gap:8px;padding:0 12px 0 8px;color:#fff;pointer-events:none">
+<button onClick="{{goMenu}}" aria-label="Close Munchi" style="pointer-events:auto;width:44px;height:44px;border:none;background:none;display:flex;align-items:center;justify-content:center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"></path></svg></button>
+<div style="flex:1"><div style="font-family:Poppins,sans-serif;font-weight:600;font-size:19px;line-height:1.1">Munchi</div><div style="font-size:12px;font-weight:400;opacity:.8">What's trending</div></div>
+<sc-if value="{{hasCart}}"><button onClick="{{goCart}}" style="pointer-events:auto;height:36px;padding:0 14px;border-radius:18px;border:none;background:#E73F1E;color:#fff;font-family:Poppins,sans-serif;font-weight:500;font-size:13px">Cart · {{cartCount}}</button></sc-if>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{otpOpen}}">
+<div onClick="{{closeOtp}}" style="position:absolute;inset:0;z-index:40;background:rgba(0,0,0,.5);animation:fadeIn .2s"></div>
+<div role="dialog" aria-label="WhatsApp sign in" style="position:absolute;left:0;right:0;bottom:0;z-index:41;background:#fff;border-radius:26px 26px 0 0;padding:24px 18px 28px;animation:sheetUp .28s ease-out">
+<sc-if value="{{otpPhone}}">
+<div style="font-family:Poppins,sans-serif;font-weight:600;font-size:21px">Continue with WhatsApp</div>
+<div style="font-size:14px;font-weight:400;color:rgba(18,18,18,.65);margin-top:6px">{{otpReason}}</div>
+<div style="display:flex;align-items:center;margin-top:18px;height:54px;border-radius:14px;border:1.5px solid {{otpBorder}};overflow:hidden">
+<span style="height:100%;display:flex;align-items:center;padding:0 14px;background:rgba(18,18,18,.04);border-right:1px solid rgba(18,18,18,.12);font-family:Poppins,sans-serif;font-weight:500;font-size:15px">+91</span>
+<input value="{{otpPhoneVal}}" onChange="{{onOtpPhone}}" inputmode="numeric" autocomplete="tel-national" placeholder="WhatsApp number" aria-label="WhatsApp number" style="flex:1;min-width:0;height:100%;border:none;outline:none;padding:0 14px;font-size:17px;font-weight:400;letter-spacing:.5px">
+</div>
+<sc-if value="{{otpHasErr}}"><div style="font-size:13px;font-weight:400;color:#E73F1E;margin-top:8px">{{otpErr}}</div></sc-if>
+<div style="font-size:12px;font-weight:400;color:rgba(18,18,18,.55);margin-top:10px;line-height:1.45">We'll send a 4-digit code on WhatsApp. Your number is shared only with Smoke House Kitchen.</div>
+<button onClick="{{sendOtp}}" style="width:100%;margin-top:18px;height:54px;border-radius:14px;border:none;background:{{otpSendBg}};color:#fff;font-family:Poppins,sans-serif;font-weight:600;font-size:16px">{{otpSendLabel}}</button>
+</sc-if>
+<sc-if value="{{otpCode}}">
+<div style="font-family:Poppins,sans-serif;font-weight:600;font-size:21px">Enter the code</div>
+<div style="font-size:14px;font-weight:400;color:rgba(18,18,18,.65);margin-top:6px;display:flex;gap:6px;align-items:center;flex-wrap:wrap">Sent on WhatsApp to {{otpMasked}}<button onClick="{{otpEdit}}" style="border:none;background:none;padding:0;color:#E73F1E;font-family:Poppins,sans-serif;font-weight:500;font-size:13px">Change</button></div>
+<div style="position:relative;margin-top:18px;height:60px">
+<div style="position:absolute;inset:0;display:grid;grid-template-columns:repeat(4,1fr);gap:10px;pointer-events:none">
+<sc-for list="{{otpBoxes}}" as="b"><div style="border-radius:14px;border:1.5px solid {{b.border}};display:flex;align-items:center;justify-content:center;font-family:Poppins,sans-serif;font-weight:600;font-size:24px">{{b.ch}}</div></sc-for>
+</div>
+<input value="{{otpCodeVal}}" onChange="{{onOtpCode}}" inputmode="numeric" autocomplete="one-time-code" aria-label="4-digit code" style="position:absolute;inset:0;width:100%;height:100%;opacity:0;border:none;font-size:16px">
+</div>
+<sc-if value="{{otpHasErr}}"><div style="font-size:13px;font-weight:400;color:#E73F1E;margin-top:10px">{{otpErr}}</div></sc-if>
+<div style="display:flex;justify-content:space-between;align-items:center;margin-top:14px">
+<span></span>
+<button onClick="{{resendOtp}}" style="border:none;background:none;padding:0;color:{{resendFg}};font-family:Poppins,sans-serif;font-weight:500;font-size:13px">{{resendLabel}}</button>
+</div>
+</sc-if>
+<sc-if value="{{otpName}}">
+<div style="font-family:Poppins,sans-serif;font-weight:600;font-size:21px">Number verified</div>
+<div style="font-size:14px;font-weight:400;color:rgba(18,18,18,.65);margin-top:6px">What name should we put on your orders?</div>
+<input value="{{otpNameVal}}" onChange="{{onOtpName}}" autocomplete="name" placeholder="Your name" aria-label="Your name" style="width:100%;margin-top:16px;height:54px;border-radius:14px;border:1.5px solid rgba(18,18,18,.2);outline:none;padding:0 14px;font-size:16px;font-weight:400">
+<button onClick="{{saveOtpName}}" style="width:100%;margin-top:16px;height:54px;border-radius:14px;border:none;background:{{nameBtnBg}};color:#fff;font-family:Poppins,sans-serif;font-weight:600;font-size:16px">Save and continue</button>
+</sc-if>
+</div>
+</sc-if>
+
+<sc-if value="{{switchOpen}}">
+<div onClick="{{closeSwitch}}" style="position:absolute;inset:0;z-index:40;background:rgba(0,0,0,.5);animation:fadeIn .2s"></div>
+<div role="dialog" aria-label="Change table or order type" style="position:absolute;left:0;right:0;bottom:0;z-index:41;background:#fff;border-radius:26px 26px 0 0;padding:24px 18px 28px;animation:sheetUp .28s ease-out">
+<sc-if value="{{swStep1}}">
+<div style="font-size:21px;font-family:Poppins,sans-serif;font-weight:600">Change table or order type</div>
+<div style="font-size:14px;color:rgba(18,18,18,.65);margin-top:8px;line-height:1.5">Your table and order type come from the QR you scan. To switch, scan the QR on the other table, or the takeaway QR at the counter.</div>
+<sc-if value="{{swHasOrders}}"><div style="font-size:13px;margin-top:12px;padding:12px 14px;border-radius:12px;background:#f5f4f3;line-height:1.45;font-weight:400">{{swOrdersNote}}</div></sc-if>
+<button onClick="{{swScan}}" style="width:100%;margin-top:18px;height:54px;border-radius:14px;border:none;background:#121212;color:#fff;font-size:16px;font-family:Poppins,sans-serif;font-weight:600">Got it</button>
+<button onClick="{{closeSwitch}}" style="width:100%;margin-top:10px;height:48px;border-radius:14px;border:1.5px solid rgba(18,18,18,.2);background:#fff;font-size:15px;font-family:Poppins,sans-serif;font-weight:500">Stay on {{contextLabel}}</button>
+</sc-if>
+<sc-if value="{{swStep2}}">
+<div style="font-size:21px;font-family:Poppins,sans-serif;font-weight:600">Scanning…</div>
+<div style="font-size:13px;color:rgba(18,18,18,.55);margin-top:6px;font-weight:400">Demo: pick the QR you'd point the camera at.</div>
+<div style="height:150px;margin-top:14px;border-radius:16px;background:#121212;position:relative;display:flex;align-items:center;justify-content:center"><div style="width:110px;height:110px;border:3px solid #fff;border-radius:14px"></div><div style="position:absolute;left:24%;right:24%;top:50%;height:2px;background:#E73F1E"></div></div>
+<div style="display:flex;flex-direction:column;gap:10px;margin-top:14px">
+<sc-for list="{{swTargets}}" as="t"><button onClick="{{t.pick}}" style="height:50px;border-radius:14px;border:1.5px solid rgba(18,18,18,.2);background:#fff;font-size:15px;font-family:Poppins,sans-serif;font-weight:500;display:flex;align-items:center;justify-content:space-between;padding:0 16px"><span>{{t.label}}</span><span style="font-size:13px;color:rgba(18,18,18,.5);font-weight:400">{{t.sub}}</span></button></sc-for>
+</div>
+</sc-if>
+<sc-if value="{{swStep3}}">
+<div style="font-size:21px;font-family:Poppins,sans-serif;font-weight:600">{{swConfirmTitle}}</div>
+<div style="font-size:14px;color:rgba(18,18,18,.65);margin-top:8px;line-height:1.5">{{swConfirmBody}}</div>
+<div style="display:flex;gap:10px;margin-top:20px">
+<button onClick="{{closeSwitch}}" style="flex:1;height:54px;border-radius:14px;border:1.5px solid #121212;background:#fff;font-size:16px;font-family:Poppins,sans-serif;font-weight:600">Cancel</button>
+<button onClick="{{swConfirm}}" style="flex:1.4;height:54px;border-radius:14px;border:none;background:#E73F1E;color:#fff;font-size:16px;font-family:Poppins,sans-serif;font-weight:600">Start new order</button>
+</div>
+</sc-if>
+</div>
+</sc-if>
+
+<sc-if value="{{hasToast}}">
+<div role="status" style="position:absolute;top:56px;left:16px;right:16px;z-index:60;display:flex;justify-content:center;pointer-events:none"><div style="background:#121212;color:#fff;border-radius:14px;padding:12px 16px;font-size:14px;font-family:Poppins,sans-serif;font-weight:500;line-height:1.35;text-align:center;animation:fadeIn .2s;box-shadow:0 8px 24px rgba(0,0,0,.25)">{{toast}}</div></div>
+</sc-if>
+
+<sc-if value="{{framed}}" hint-placeholder-val="{{ true }}"><div style="position:absolute;bottom:8px;left:50%;transform:translateX(-50%);width:134px;height:5px;border-radius:3px;background:#121212;z-index:70;pointer-events:none"></div></sc-if>
+</div>
+</div>
+<sc-if value="{{framed}}" hint-placeholder-val="{{ true }}"><div style="width:300px;max-width:100%;display:flex;flex-direction:column;gap:12px;padding-top:12px">
+<div style="font-family:Poppins,sans-serif;font-weight:600;font-size:20px">Test QR codes</div>
+<div style="font-size:14px;line-height:1.5;color:rgba(18,18,18,.65);margin-top:-6px">Tap Scan to try a QR here, or scan with your phone camera to open the app full screen, like a real customer.</div>
+<sc-for list="{{qrs}}" as="q" hint-placeholder-count="4">
+<div style="background:#fff;border-radius:16px;padding:14px;display:flex;flex-direction:column;gap:12px;align-items:stretch;border:2px solid {{q.border}}">
+<div role="img" aria-label="{{q.label}} QR code" style="width:240px;height:240px;align-self:center;flex:none;background-color:#fff;background-size:contain;background-repeat:no-repeat;background-position:center;background-image:{{q.bg}}"></div>
+<div style="display:flex;flex-direction:column;gap:3px;align-items:center;text-align:center">
+<div style="font-family:Poppins,sans-serif;font-weight:500;font-size:15px">{{q.label}}</div>
+<div style="font-size:13px;font-weight:400;color:rgba(18,18,18,.6)">{{q.sub}}</div>
+<button onClick="{{q.scan}}" style="margin-top:6px;height:34px;padding:0 14px;border-radius:8px;border:none;background:{{q.btnBg}};color:#fff;font-family:Poppins,sans-serif;font-weight:500;font-size:13px">{{q.btn}}</button>
+</div>
+</div>
+</sc-for>
+<div style="font-size:12px;font-weight:400;color:rgba(18,18,18,.5);line-height:1.5">Demo mode · mock menu and simulated restaurant responses. WhatsApp demo code: 4821</div>
+</div></sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;mode&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;dine-in&quot;,&quot;takeaway&quot;,&quot;invalid-qr&quot;],&quot;default&quot;:&quot;dine-in&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Scanned QR&quot;},&quot;table&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;07&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Scanned QR&quot;},&quot;layout&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;grid&quot;,&quot;list&quot;],&quot;default&quot;:&quot;grid&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Menu&quot;},&quot;vegMarks&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;standard&quot;,&quot;brand&quot;],&quot;default&quot;:&quot;standard&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Menu&quot;},&quot;demoReject&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Simulated restaurant&quot;}}">
+const RED='#E73F1E',INK='#121212',TINT='#FDECE8',GRAY='rgba(18,18,18,.06)';
+const fmt=n=>'₹'+Math.round(n).toLocaleString('en-IN');
+const now=()=>new Date().toLocaleTimeString('en-IN',{hour:'numeric',minute:'2-digit'});
+const SIZE={id:'size',name:'Size',req:true,one:true,def:'reg',opts:[{id:'reg',label:'Regular',p:0},{id:'lg',label:'Large (double patty)',p:70}]};
+const SPICE={id:'spice',name:'Spice level',req:true,one:true,opts:[{id:'mild',label:'Mild',p:0},{id:'med',label:'Medium',p:0},{id:'hot',label:'Hot',p:0}]};
+const ADDON={id:'add',name:'Add-ons',req:false,one:false,max:3,opts:[{id:'cheese',label:'Extra cheese slice',p:30},{id:'jal',label:'Jalapeños',p:20},{id:'dip',label:'Peri peri dip',p:25}]};
+const PORTION={id:'portion',name:'Portion',req:true,one:true,def:'half',opts:[{id:'half',label:'Half',p:0},{id:'full',label:'Full',p:140}]};
+const M=[
+{id:1,name:'Smoked Chicken Burger',desc:'Char-grilled chicken thigh, smoked mayo, red onion and crisp lettuce.',price:199,veg:false,r:4.3,n:122,best:true,cat:'Burgers',rec:true,g:[SIZE,SPICE,ADDON],img:'burger photo'},
+{id:2,name:'Peri Peri Crinkle Fries',desc:'Crinkle-cut fries tossed in house peri peri seasoning.',price:169,mrp:199,veg:true,r:4.7,n:34,best:true,cat:'Starters',rec:true,img:'fries photo',tags:'potato'},
+{id:3,name:'Double Paneer Crunch Burger',desc:'Two crumb-fried paneer patties, tandoori mayo, pickled onion.',price:208,mrp:249,veg:true,r:4.5,n:131,best:true,cat:'Burgers',rec:true,g:[SIZE,ADDON],img:'burger photo',tags:'cottage cheese'},
+{id:4,name:'Lamb Smash Burger',desc:"Chef's special. Smashed lamb patty, cheddar, caramelised onion.",price:309,veg:false,r:4.2,n:142,cat:'Burgers',rec:true,g:[SIZE,SPICE,ADDON],img:'burger photo',tags:'mutton'},
+{id:5,name:'Tandoori Paneer Tikka',desc:'Clay-oven paneer, peppers and onion with mint chutney.',price:279,veg:true,r:4.4,n:88,cat:'Starters',g:[SPICE],img:'tikka photo'},
+{id:6,name:'Chicken 65',desc:'Crisp fried chicken tempered with curry leaves and chilli.',price:289,veg:false,r:4.1,n:64,cat:'Starters',g:[SPICE],img:'starter photo'},
+{id:7,name:'Butter Chicken',desc:'Tandoori chicken in a slow-cooked tomato and butter gravy.',price:389,veg:false,r:4.6,n:210,best:true,cat:'Mains',rec:true,g:[PORTION],img:'curry photo'},
+{id:8,name:'Dal Tadka',desc:'Yellow lentils tempered with ghee, cumin and garlic.',price:269,veg:true,r:4.5,n:176,cat:'Mains',g:[PORTION],img:'dal photo'},
+{id:9,name:'Garlic Butter Naan',desc:'Tandoor-baked naan brushed with garlic butter.',price:69,veg:true,r:4.3,n:95,cat:'Breads',img:'naan photo'},
+{id:10,name:'Mini Veg Thali',desc:'Two curries, dal, rice, roti and salad.',price:249,veg:true,r:3.9,n:41,cat:'Mains',off:true,img:'paratha photo'},
+{id:11,name:'Iced Lemon Tea',desc:'Fresh brewed tea, lemon and mint over ice.',price:99,veg:true,r:4.0,n:52,cat:'Beverages',img:'drink photo'},
+{id:12,name:'Cold Coffee',desc:'Thick blended coffee with vanilla ice cream.',price:149,mrp:179,veg:true,r:4.4,n:73,cat:'Beverages',img:'drink photo'},
+{id:13,name:'Strawberry Cheesecake',desc:'Baked vanilla cheesecake with fresh strawberries.',price:229,mrp:279,veg:true,r:4.6,n:120,best:true,cat:'Desserts',img:'dessert photo'},
+{id:14,name:'Brownie with Ice Cream',desc:'Warm chocolate brownie, vanilla scoop, fudge sauce.',price:189,veg:true,r:3.8,n:29,cat:'Desserts',img:'dessert photo'}];
+const CATS=['Burgers','Starters','Mains','Breads','Beverages','Desserts'];
+const PH={"1":"1571091718767-18b5b1457add","2":"1541592106381-b31e9677c0e5","3":"1586190848861-99aa4a171e90","4":"1607013251379-e6eecfffe234","5":"1567188040759-fb8a883dc6d8","6":"1626645738196-c2a7c87a8f58","7":"1603894584373-5ac82b2ae398","8":"1626500155537-93690c24099e","9":"1565557623262-b51c2513a641","10":"1546833999-b9f581a1996d","11":"1556679343-c7306c1976bc","12":"1461023058943-07fcbe16d735","13":"1589119908995-c6837fa14848","14":"1606313564200-e75d5e30476c"};
+const photo=id=>'https://images.unsplash.com/photo-'+PH[id]+'?w=600&q=70&auto=format&fit=crop';
+const REELS=[{id:1,ph:'1568901346375-23c9450c58cd',likes:12400,cap:'Smoky, juicy and built to drip. Our most ordered burger.'},{id:2,ph:'1573080496219-bb080dd4f877',likes:8900,cap:'Peri peri crinkle fries, tossed to order.'},{id:5,ph:'1599487488170-d11ec9c172f0',likes:6100,cap:'Straight off the tandoor skewer.'},{id:7,ph:'1585937421612-70a008356fbe',likes:15200,cap:'Butter chicken, slow-cooked since 7 am.'},{id:4,ph:'1550547660-d9450f859349',likes:9700,cap:'New this week: the Lamb Smash.'},{id:12,ph:'1517701604599-bb29b565090c',likes:4300,cap:'Thick cold coffee, extra scoop.'},{id:6,ph:'1562967914-608f82629710',likes:5800,cap:'Chicken 65 with curry leaves and chilli.'}];
+const UPI_ID='7789863214@upi';
+const upi=(amt,note)=>'upi://pay?pa='+UPI_ID+'&pn='+encodeURIComponent('Smoke House Kitchen')+'&am='+Number(amt).toFixed(2)+'&cu=INR&tn='+encodeURIComponent(note);
+const QRC={};
+const qrBg=txt=>{if(!txt||!window.qrcode)return 'none';if(!QRC[txt]){try{const q=window.qrcode(0,'L');q.addData(txt);q.make();QRC[txt]='url("data:image/svg+xml,'+encodeURIComponent(q.createSvgTag(6,2))+'")'}catch(e){return 'none'}}return QRC[txt]};
+const kfmt=n=>n>=1000?(n/1000).toFixed(1).replace('.0','')+'K':String(n);
+const QRS=[{k:'table-07',m:'dine-in',t:'07',label:'Table 07',sub:'Dine-in QR'},{k:'table-12',m:'dine-in',t:'12',label:'Table 12',sub:'Dine-in QR'},{k:'takeaway',m:'takeaway',t:'07',label:'Takeaway counter',sub:'Pickup QR'},{k:'invalid',m:'invalid-qr',t:'00',label:'Damaged QR',sub:'Error state'}];
+const FILTERS=[{k:'veg',label:'Veg'},{k:'non',label:'Non-veg'},{k:'r4',label:'Ratings 4.0+'},{k:'best',label:'Bestseller'},{k:'offer',label:'Offers'}];
+const REASONS=['Need assistance','Request water','Need cutlery','Ask about an order','Other'];
+const OMIN=499,OOFF=50;
+const TERMINAL=['served','collected','rejected'];
+const ACCEPTED=['confirmed','preparing','ready','served'];
+const fresh=()=>({otp:null,reel:0,liked:{},mo:null,to:null,sw:0,swTarget:null,screen:'menu',cart:[],f:{},q:'',listening:false,cat:'rec',stuck:false,banner:0,sheet:null,sel:{},sQty:1,sNote:'',drawer:false,catMenu:false,orders:[],trackId:null,confirm:false,submitting:false,note:'',coupon:false,name:'',phone:'',formErr:'',waiterOpen:false,reason:REASONS[0],waiter:'idle',waiterAt:'',billAsk:false,bill:{status:'none'},pay:'unpaid',stars:0,toast:''});
+
+class Component extends DCLogic {
+  state=fresh();
+  scrollRef=React.createRef();reelRef=React.createRef();dealClockRef=React.createRef();stickyRef=React.createRef();bannerRef=React.createRef();markRef=React.createRef();
+  timers=[];
+  mode(){return this.state.mo||(this.props.mode??'dine-in')}
+  table(){return this.state.to||(this.props.table??'07')}
+  dine(){return this.mode()==='dine-in'}
+  skey(m,t){return 'ecomeal-demo-'+(m||this.mode())+'-'+(t||this.table())}
+  loadSaved(m,t){try{return JSON.parse(localStorage.getItem(this.skey(m,t))||'{}')}catch(e){return {}}}
+  componentDidMount(){
+    this.rm=!!(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches);
+    const act=(()=>{try{return JSON.parse(localStorage.getItem('ecomeal-demo-active')||'{}')}catch(e){return {}}})();const mo=act.mo||null,to=act.to||null;
+    this.setState({...fresh(),mo,to,...this.loadSaved(mo||(this.props.mode??'dine-in'),to||(this.props.table??'07'))},()=>this.resume());
+    const bareNow=()=>true;
+    this.setState({user:this.loadUser(),waOn:true,bare:bareNow()});
+    this.onRs=()=>{const b=bareNow();if(b!==this.state.bare)this.setState({bare:b})};window.addEventListener('resize',this.onRs);
+    const qw=()=>{if(window.qrcode)this.forceUpdate();else this.later(qw,200)};qw();
+    try{const q=new URLSearchParams(location.search).get('qr')||'';const mt=q.match(/^table-(\d{1,3})$/);const x=mt?{m:'dine-in',t:mt[1].padStart(2,'0')}:QRS.find(z=>z.k===q);if(x)setTimeout(()=>this.scanQR(x.m,x.t),0);else if(q)setTimeout(()=>this.scanQR('invalid-qr','00'),0)}catch(e){}
+    this.clk=setInterval(()=>{const el=this.dealClockRef.current;if(el)el.textContent=this.clockText();const o=this.state.otp;if(o&&o.left>0)this.setState({otp:{...o,left:o.left-1}})},1000);
+    this.iv=setInterval(()=>{if(this.paused||this.state.screen!=='menu')return;const b=this.bannerRef.current;if(!b)return;const i=(this.state.banner+1)%3;b.scrollTo({left:i*(b.clientWidth-20),behavior:this.rm?'auto':'smooth'});},4500);
+  }
+  clockText(){const d=new Date(),e=new Date(d);e.setHours(24,0,0,0);const x=Math.max(0,Math.floor((e-d)/1000));const p=n=>String(n).padStart(2,'0');return p(Math.floor(x/3600))+':'+p(Math.floor(x/60)%60)+':'+p(x%60)}
+  loadUser(){try{return JSON.parse(localStorage.getItem('ecomeal-user')||'null')}catch(e){return null}}
+  setUser(u){try{u?localStorage.setItem('ecomeal-user',JSON.stringify(u)):localStorage.removeItem('ecomeal-user')}catch(e){}this.setState({user:u})}
+  openOtp(after){const u=this.state.user;this.setState({otp:{step:'phone',phone:u?u.phone:'',code:'',name:u?u.name:'',err:'',busy:false,left:0,after:after||null}})}
+  scanQR(m,t){this.timers.forEach(clearTimeout);this.timers=[];this.setState({...fresh(),mo:m,to:t,...this.loadSaved(m,t)},()=>{this.resume();if(m!=='invalid-qr')this.toast(m==='takeaway'?'Scanned takeaway QR':'Scanned Table '+t+' QR');this.scrollRef.current&&this.scrollRef.current.scrollTo({top:0})})}
+  finishOtp(){const o=this.state.otp;this.setUser({name:o.name.trim(),phone:o.phone});this.setState({otp:null},()=>{this.toast('Signed in as '+o.name.trim());if(o.after==='confirm')this.setState({confirm:true})})}
+  componentWillUnmount(){window.removeEventListener('resize',this.onRs);clearInterval(this.iv);clearInterval(this.clk);this.timers.forEach(clearTimeout);this.rec&&this.rec.abort();}
+  componentDidUpdate(pp){
+    if(pp.mode!==this.props.mode||pp.table!==this.props.table){this.timers.forEach(clearTimeout);this.timers=[];this.setState({...fresh(),...this.loadSaved(this.props.mode??'dine-in',this.props.table??'07')},()=>this.resume());return;}
+    const s=this.state;try{localStorage.setItem('ecomeal-demo-active',JSON.stringify({mo:s.mo,to:s.to}));localStorage.setItem(this.skey(),JSON.stringify({screen:s.screen,cart:s.cart,orders:s.orders,trackId:s.trackId,coupon:s.coupon,name:s.name,phone:s.phone,waiter:s.waiter,waiterAt:s.waiterAt,reason:s.reason,bill:s.bill,pay:s.pay}))}catch(e){}
+  }
+  later(fn,ms){this.timers.push(setTimeout(fn,ms))}
+  resume(){
+    const s=this.state;
+    s.orders.forEach(o=>{if(!TERMINAL.includes(o.status))this.sim(o.id)});
+    if(s.bill.status==='requested')this.later(()=>this.billReady(),3500);
+    if(['opening','awaiting','staff'].includes(s.pay))this.later(()=>this.setState({pay:'paid'}),2500);
+    if(s.waiter==='notified'||s.waiter==='ack')this.later(()=>this.setState({waiter:'idle'}),10000);
+  }
+  toast(m){this.setState({toast:m});clearTimeout(this.tt);this.tt=setTimeout(()=>this.setState({toast:''}),2800)}
+  // ---- simulated backend (demo mode only) ----
+  sim(id){
+    const o=this.state.orders.find(x=>x.id===id);if(!o)return;const dine=this.dine();
+    const nx={pending:o.reject?'rejected':'confirmed',confirmed:'preparing',preparing:'ready',ready:dine?'served':'collected'}[o.status];
+    if(!nx)return;
+    const d={pending:4000,confirmed:3000,preparing:9000,ready:dine?6000:9000}[o.status];
+    this.later(()=>{
+      this.setState(s=>({orders:s.orders.map(x=>x.id===id?{...x,status:nx,pay:nx==='collected'?'paid':x.pay,times:{...x.times,[nx]:now()}}:x)}),()=>{
+        if(nx==='rejected')this.toast('The restaurant could not accept order #'+o.no);
+        if(nx==='confirmed'&&this.state.screen!=='track')this.toast('Order #'+o.no+' confirmed by the restaurant');
+        this.sim(id);
+      });
+    },d);
+  }
+  billReady(){
+    const acc=this.state.orders.filter(o=>ACCEPTED.includes(o.status));
+    const agg={};acc.forEach(o=>o.lines.forEach(l=>{const k=l.name+'|'+l.opts;agg[k]=agg[k]||{name:l.name,opts:l.opts,qty:0,amt:0};agg[k].qty+=l.qty;agg[k].amt+=l.unit*l.qty;}));
+    const lines=Object.values(agg);const sub=lines.reduce((a,l)=>a+l.amt,0);const disc=acc.reduce((a,o)=>a+(o.disc||0),0);
+    const svc=Math.round((sub-disc)*.05);const tx=sub-disc+svc;const cg=Math.round(tx*.025*100)/100;const total=Math.round(tx+cg*2);
+    const rows=[{label:'Item total',value:fmt(sub)}];if(disc)rows.push({label:'Discount (EAT50)',value:'− '+fmt(disc)});
+    rows.push({label:'Service charge (5%)',value:fmt(svc)},{label:'CGST (2.5%)',value:'₹'+cg.toFixed(2)},{label:'SGST (2.5%)',value:'₹'+cg.toFixed(2)},{label:'Round off',value:'₹'+(total-tx-cg*2).toFixed(2)});
+    this.setState(s=>({bill:{status:'ready',no:'INV-'+(20480+s.orders.length),at:now(),lines:lines.map(l=>({name:l.name,opts:l.opts,qty:l.qty,amt:fmt(l.amt)})),rows,total}, screen:s.screen==='table'?'bill':s.screen}));
+    this.toast('Your final bill is ready');
+  }
+  // ---- menu ----
+  filtered(){const {f,q}=this.state;const t=q.trim().toLowerCase();
+    return M.filter(it=>{if((f.veg||f.non)&&!((f.veg&&it.veg)||(f.non&&!it.veg)))return false;if(f.r4&&!(it.r>=4))return false;if(f.best&&!it.best)return false;if(f.offer&&!it.mrp)return false;
+      if(t&&!(it.name+' '+it.desc+' '+it.cat+' '+(it.tags||'')).toLowerCase().includes(t))return false;return true;});}
+  lock(id){const t=Date.now();this._l=this._l||{};if(this._l[id]&&t-this._l[id]<350)return true;this._l[id]=t;return false}
+  add(it){if(it.off||this.lock(it.id))return;if(it.g)this.openSheet(it);else this.addLine(it,{},1,'',it.price)}
+  addLine(it,sel,qty,opts,unit){
+    const key=it.id+'|'+JSON.stringify(sel);
+    this.setState(s=>{const ex=s.cart.find(l=>l.key===key);return {cart:ex?s.cart.map(l=>l.key===key?{...l,qty:l.qty+qty}:l):[...s.cart,{key,id:it.id,name:it.name,veg:it.veg,unit,qty,opts}]}});
+  }
+  inc(it){if(this.lock('i'+it.id))return;const ls=this.state.cart.filter(l=>l.id===it.id);const l=ls[ls.length-1];if(!l)return;this.setState(s=>({cart:s.cart.map(x=>x.key===l.key?{...x,qty:x.qty+1}:x)}));if(it.g)this.toast('Added one more · '+(l.opts||'same choices'))}
+  dec(it){const ls=this.state.cart.filter(l=>l.id===it.id);const l=ls[ls.length-1];if(!l)return;this.decKey(l.key)}
+  decKey(k){this.setState(s=>({cart:s.cart.map(x=>x.key===k?{...x,qty:x.qty-1}:x).filter(x=>x.qty>0)}))}
+  incKey(k){this.setState(s=>({cart:s.cart.map(x=>x.key===k?{...x,qty:x.qty+1}:x)}))}
+  openSheet(it){const sel={};it.g.forEach(g=>{if(g.one&&g.def)sel[g.id]=g.def;if(!g.one)sel[g.id]=[]});this.setState({sheet:it.id,sel,sQty:1,sNote:''})}
+  sheetCalc(){const it=M.find(x=>x.id===this.state.sheet);const sel=this.state.sel;let unit=it.price,miss=null;const labels=[];
+    it.g.forEach(g=>{if(g.one){const o=g.opts.find(o=>o.id===sel[g.id]);if(o){unit+=o.p;labels.push(o.label)}else if(g.req&&!miss)miss=g.name}else{(sel[g.id]||[]).forEach(id=>{const o=g.opts.find(o=>o.id===id);unit+=o.p;labels.push(o.label)})}});
+    return {it,unit,miss,labels};}
+  goCat(id){const c=this.scrollRef.current,st=this.stickyRef.current;if(!c||!st)return;const el=c.querySelector('[data-sec="'+id+'"]');if(!el)return;c.scrollTo({top:el.offsetTop-st.offsetHeight+2,behavior:this.rm?'auto':'smooth'});this.setState({cat:id})}
+  totals(){const s=this.state,take=this.mode()==='takeaway';const sub=s.cart.reduce((a,l)=>a+l.unit*l.qty,0);const disc=s.coupon&&sub>=OMIN?OOFF:0;const pack=take&&sub?20:0;const gst=Math.round((sub-disc+pack)*.05);return {sub,disc,pack,gst,total:sub-disc+pack+gst,count:s.cart.reduce((a,l)=>a+l.qty,0)}}
+  anim(kind){
+    const h=React.createElement,rm=this.rm,a=v=>rm?'none':v;
+    if(kind==='pan')return h('div',{style:{position:'relative',width:140,height:100}},
+      [0,1,2].map(i=>h('div',{key:'s'+i,style:{position:'absolute',left:46+i*18,top:4,width:5,height:24,borderRadius:3,background:'rgba(18,18,18,.18)',animation:a(`steam 1.8s ${i*.45}s infinite ease-out`)}})),
+      [0,1,2].map(i=>h('div',{key:'f'+i,style:{position:'absolute',left:42+i*20,top:50,width:14,height:10,borderRadius:6,background:i===1?INK:RED,animation:a(`toss 1.2s ${i*.15}s infinite ease-in-out`)}})),
+      h('div',{key:'p',style:{position:'absolute',left:22,top:60,width:96,height:26,background:INK,borderRadius:'0 0 48px 48px'}}),
+      h('div',{key:'hd',style:{position:'absolute',left:116,top:61,width:24,height:7,background:INK,borderRadius:4}}));
+    if(kind==='pulse')return h('div',{style:{position:'relative',width:100,height:100,display:'flex',alignItems:'center',justifyContent:'center'}},
+      [0,1].map(i=>h('div',{key:i,style:{position:'absolute',width:56,height:56,borderRadius:'50%',border:'2px solid '+RED,animation:a(`pulse 2s ${i}s infinite ease-out`)}})),
+      h('div',{key:'c',style:{position:'relative',width:56,height:56,borderRadius:'50%',background:RED}},
+        h('div',{style:{position:'absolute',left:26,top:12,width:4,height:18,background:'#fff',borderRadius:2}}),
+        h('div',{style:{position:'absolute',left:26,top:26,width:14,height:4,background:'#fff',borderRadius:2}})));
+    if(kind==='x')return h('div',{style:{width:72,height:72,borderRadius:'50%',background:INK,color:'#fff',fontSize:36,fontWeight:600,fontFamily:'Poppins,sans-serif',display:'flex',alignItems:'center',justifyContent:'center'}},'!');
+    return h('div',{style:{width:80,height:80,borderRadius:'50%',background:RED,display:'flex',alignItems:'center',justifyContent:'center'}},h('div',{style:{width:18,height:34,borderRight:'5px solid #fff',borderBottom:'5px solid #fff',transform:'rotate(45deg) translate(-3px,-5px)'}}));
+  }
+  renderVals(){
+    const s=this.state,dine=this.dine(),take=this.mode()==='takeaway',invalid=this.mode()==='invalid-qr',T=this.table();
+    const std=(this.props.vegMarks??'standard')==='standard';const vegC=std?'#1E8A4C':INK,nonC=std?'#9A3412':RED;
+    const grid=(this.props.layout??'grid')==='grid';
+    const qtyOf=id=>s.cart.filter(l=>l.id===id).reduce((a,l)=>a+l.qty,0);
+    const card=it=>{const q=qtyOf(it.id),av=!it.off;return {photo:photo(it.id),bg:'url('+photo(it.id)+')',imgFilter:av?'none':'grayscale(1)',customText:av&&it.g?'Customisable':'',name:it.name,desc:it.desc,img:it.img,price:fmt(it.price),mrp:it.mrp?fmt(it.mrp):'',hasMrp:!!it.mrp,veg:it.veg,non:!it.veg,best:!!it.best,rating:it.r.toFixed(1)+' ('+it.n+')',qty:q,showAdd:av&&!q,showStep:av&&q>0,unavailable:!av,custom:av&&!!it.g,add:()=>this.add(it),inc:()=>this.inc(it),dec:()=>this.dec(it),open:()=>{if(av&&it.g)this.openSheet(it)}}};
+    const list=this.filtered();const anyF=Object.values(s.f).some(Boolean);const filtering=!!s.q.trim()||anyF;
+    const secs=[];if(!filtering){const r=list.filter(i=>i.rec);if(r.length)secs.push({id:'rec',name:'Recommended',n:r.length,items:r.map(card)})}
+    CATS.forEach(c=>{const r=list.filter(i=>i.cat===c);if(r.length)secs.push({id:c,name:c,n:r.length,items:r.map(card)})});
+    const curCat=secs.some(x=>x.id===s.cat)?s.cat:(secs[0]&&secs[0].id);
+    const cats=secs.map(x=>{const a=x.id===curCat;return {name:x.name,count:x.n,weight:a?600:500,fg:a?INK:'rgba(18,18,18,.5)',line:a?RED:'transparent',go:()=>this.goCat(x.id),goClose:()=>{this.setState({catMenu:false});setTimeout(()=>this.goCat(x.id),30)}}});
+    const chips=FILTERS.map(fl=>{const a=!!s.f[fl.k];return {label:fl.label,active:a,isVeg:fl.k==='veg',isNon:fl.k==='non',bg:a?INK:'#fff',fg:a?'#fff':INK,border:a?INK:'rgba(18,18,18,.15)',toggle:()=>this.setState(st=>({f:{...st.f,[fl.k]:!st.f[fl.k]}}))}});
+    if(anyF)chips.push({label:'Clear all',active:false,bg:'#fff',fg:RED,border:RED,toggle:()=>this.setState({f:{}})});
+    const t=this.totals();const hasCart=t.count>0;const elig=t.sub>=OMIN;
+    const offerText=!elig?`Add ${fmt(OMIN-t.sub)} more to unlock Flat ₹50 off with EAT50`:(s.coupon?'EAT50 applied · you save ₹50':'Flat ₹50 off unlocked · apply EAT50 in cart');
+    const live=s.orders.filter(o=>o.status!=='rejected');
+    const lines=s.cart.map(l=>({name:l.name,opts:l.opts,hasOpts:!!l.opts,qty:l.qty,unit:fmt(l.unit),total:fmt(l.unit*l.qty),veg:l.veg,non:!l.veg,inc:()=>this.incKey(l.key),dec:()=>this.decKey(l.key)}));
+    const billRows=[{label:'Item total',value:fmt(t.sub),fg:INK}];if(t.disc)billRows.push({label:'Discount (EAT50)',value:'− '+fmt(t.disc),fg:RED});if(t.pack)billRows.push({label:'Packaging',value:fmt(t.pack),fg:INK});billRows.push({label:'GST (5%)',value:fmt(t.gst),fg:INK});
+    // track
+    const o=s.orders.find(x=>x.id===s.trackId);let tr={no:'',sub:'',title:'',desc:'',steps:[],lines:[],total:'',totalLabel:'',payLabel:'',payBg:GRAY,payFg:INK,showPickup:false,rejected:false,code:'',moreLabel:'Back to menu'};let trackAnim=null;
+    if(o){
+      const keys=['placed','pending','confirmed','preparing','ready',dine?'served':'collected'];
+      const labels=['Order placed','Awaiting restaurant confirmation','Confirmed by restaurant','Preparing',dine?'Ready to serve':'Ready for collection',dine?'Served at your table':'Collected'];
+      const rej=o.status==='rejected';const cur=rej?1:keys.indexOf(o.status);const term=cur===keys.length-1;
+      const copy={pending:['Waiting for the restaurant to confirm','Cooking starts once they accept.'],
+        confirmed:['Order confirmed','Heading to the kitchen.'],
+        preparing:['Preparing your food','About 12 min.'],
+        ready:dine?['Ready to serve','On its way to Table '+T+'.']:['Ready for pickup','Show this code at Counter 2.'],
+        served:['Served','Enjoy your meal.'],
+        collected:['Collected','Enjoy your meal.'],
+        rejected:['Order not accepted','An item is out of stock. You haven\'t been charged.']}[o.status];
+      tr={no:o.no,sub:(dine?'Table '+T:'Takeaway')+' · placed '+o.times.placed,title:copy[0],desc:copy[1],
+        steps:labels.map((lb,i)=>{const done=i<cur||(term&&i===cur);const isCur=i===cur&&!term;const bad=rej&&i===1;return {label:bad?'Not accepted by restaurant':lb,time:o.times[keys[i]]||(bad?o.times.rejected:'')||'',dot:done?INK:(isCur||bad?RED:'#fff'),ring:done?INK:(isCur||bad?RED:'rgba(18,18,18,.2)'),line:i<cur?INK:'rgba(18,18,18,.12)',weight:isCur||done||bad?500:300,fg:done||isCur||bad?INK:'rgba(18,18,18,.45)',notLast:i<labels.length-1&&!(rej&&i===1)}}).slice(0,rej?2:labels.length),
+        lines:o.lines.map(l=>({qty:l.qty,name:l.name,opts:l.opts?' · '+l.opts:'',total:fmt(l.unit*l.qty)})),total:fmt(o.total),totalLabel:dine?'Order estimate':'To pay',
+        payLabel:dine?'Pay at the end via bill':(o.pay==='paid'?'Paid':o.pay==='upiwait'?'UPI payment pending':'Unpaid · UPI or counter'),payBg:o.pay==='paid'?INK:TINT,payFg:o.pay==='paid'?'#fff':RED,
+        showPickup:take&&o.status==='ready',code:String(4800+(o.no%100)),rejected:rej,moreLabel:dine?'Order more':'Back to menu'};
+      if(dine&&o.status!=='served')tr.payBg=GRAY,tr.payFg=INK;
+      trackAnim=this.anim(rej?'x':o.status==='pending'?'pulse':o.status==='preparing'||o.status==='confirmed'?'pan':'done');
+    }
+    // table
+    const acc=s.orders.filter(x=>ACCEPTED.includes(x.status));const pend=s.orders.filter(x=>x.status==='pending');
+    const accSub=acc.reduce((a,x)=>a+x.sub-x.disc,0);
+    const chip={collected:['Collected',GRAY,INK],pending:['Awaiting confirmation',TINT,RED],confirmed:['Confirmed',GRAY,INK],preparing:['Preparing',INK,'#fff'],ready:['Ready to serve',RED,'#fff'],served:['Served',GRAY,INK],rejected:['Not accepted',TINT,RED]};
+    const wt={idle:'Call waiter',sending:'Notifying…',notified:'Waiter notified',ack:'Waiter on the way'}[s.waiter];
+    const tb={amount:fmt(accSub*1.05),accCount:String(acc.length),pendingAmt:fmt(pend.reduce((a,x)=>a+x.total,0)),empty:!s.orders.length,
+      orders:[...s.orders].reverse().map(x=>{const cp=chip[x.status]||['Order',GRAY,INK];return {no:x.no,at:x.times.placed,status:cp[0],chipBg:cp[1],chipFg:cp[2],items:x.lines.map(l=>l.qty+' × '+l.name).join(', '),amount:fmt(x.total),open:()=>this.setState({trackId:x.id,screen:'track'})}}),
+      waiterActive:s.waiter==='notified'||s.waiter==='ack',waiterText:s.waiter==='ack'?'Ravi acknowledged your request and is on the way.':`Waiter notified at ${s.waiterAt} · ${s.reason}`,waiterBtn:wt,
+      billRequested:s.bill.status==='requested',billReady:s.bill.status==='ready',billBtn:s.bill.status==='none'?'Request bill':s.bill.status==='requested'?'Bill requested':'View bill',billBg:acc.length||s.bill.status!=='none'?RED:'rgba(18,18,18,.3)'};
+    // bill
+    const b=s.bill;const pl0={upiwait:['Payment pending',TINT,RED],unpaid:['Unpaid',TINT,RED],opening:['Opening UPI app…',GRAY,INK],awaiting:['Awaiting confirmation',GRAY,INK],staff:['Awaiting cashier',GRAY,INK],paid:['Paid',INK,'#fff']};
+    const bl={no:b.no||'',at:b.at||'',lines:b.lines||[],rows:b.rows||[],total:b.total!=null?fmt(b.total):'',payLabel:(pl0[s.pay]||pl0.unpaid)[0],payBg:(pl0[s.pay]||pl0.unpaid)[1],payFg:(pl0[s.pay]||pl0.unpaid)[2],canPay:s.pay==='unpaid',upiWait:s.pay==='upiwait',busy:['opening','awaiting','staff'].includes(s.pay),paid:s.pay==='paid',
+      payText:{opening:'Opening your UPI app…',awaiting:'Waiting for the payment provider to confirm…',staff:'A waiter is bringing the card machine. Status updates once the cashier confirms.'}[s.pay]||''};
+    // sheet
+    let sh={name:'',desc:'',img:'',price:'',groups:[],btn:'',btnBg:RED};
+    if(s.sheet){const {it,unit,miss}=this.sheetCalc();
+      sh={photo:photo(it.id),bg:'url('+photo(it.id)+')',name:it.name,desc:it.desc,img:it.img,price:fmt(it.price),btn:miss?'Select '+miss.toLowerCase():'Add item · '+fmt(unit*s.sQty),btnBg:miss?'rgba(18,18,18,.35)':RED,
+        groups:it.g.map(g=>({name:g.name,tag:g.req?'Required':'Optional',tagBg:g.req?TINT:GRAY,tagFg:g.req?RED:INK,hint:g.one?'Select 1':'Choose up to '+g.max,radius:g.one?'50%':'5px',
+          options:g.opts.map(op=>{const on=g.one?s.sel[g.id]===op.id:(s.sel[g.id]||[]).includes(op.id);return {label:op.label,price:op.p?'+ '+fmt(op.p):'',ind:on?RED:'rgba(18,18,18,.3)',dot:on?RED:'transparent',fw:on?500:300,
+            pick:()=>this.setState(st=>{if(g.one)return {sel:{...st.sel,[g.id]:op.id}};const cur=st.sel[g.id]||[];if(cur.includes(op.id))return {sel:{...st.sel,[g.id]:cur.filter(x=>x!==op.id)}};if(cur.length>=g.max){this.toast('You can pick up to '+g.max);return null}return {sel:{...st.sel,[g.id]:[...cur,op.id]}}})}})}))};}
+    const dot=i=>s.banner===i;
+    const ctxLabel=dine?'Dine-in · Table '+T:'Takeaway · Order for pickup';
+    const go=scr=>()=>this.setState({screen:scr,drawer:false,catMenu:false});
+    const drawerItems=[...(dine?[{label:'Your table',sub:live.length?live.length+' orders':'',fn:go('table')}]:[{label:'My orders',sub:s.orders.length?s.orders.length+' today':'',fn:()=>{const l=s.orders[s.orders.length-1];if(l)this.setState({trackId:l.id,screen:'track',drawer:false});else this.toast('No orders yet')}}]),
+      {label:'Restaurant info',sub:'Open till 11 pm',fn:()=>this.toast('100 Ft Road, Indiranagar · +91 80 4000 1234')},{label:'Help & support',sub:'',fn:()=>this.toast(dine?'Use Call waiter for help at your table':'Visit Counter 2 or call +91 80 4000 1234')},{label:'Privacy policy',sub:'',fn:()=>this.toast('Opens the privacy policy')},{label:'Terms & conditions',sub:'',fn:()=>this.toast('Opens terms & conditions')}];
+    const scr=s.screen;
+    return {
+      isInvalid:invalid,isMenu:!invalid&&scr==='menu',isCart:!invalid&&scr==='cart',isTrack:!invalid&&scr==='track'&&!!o,isTable:!invalid&&dine&&scr==='table',isBill:!invalid&&dine&&scr==='bill'&&b.status==='ready',isThanks:!invalid&&scr==='thanks',
+      isDine:dine,isTake:take,tableNo:T,statusBg:!invalid&&(scr==='menu'||scr==='munchi')?INK:'#fff',statusFg:!invalid&&(scr==='menu'||scr==='munchi')?'#fff':INK,
+      contextLabel:ctxLabel,contextShort:dine?T:'TA',heroNote:dine?'You\'re ordering for Table '+T:'Collect at Counter 2',
+      cartContextTitle:dine?'Table '+T:'Takeaway',cartContextSub:dine?'Sent to the kitchen once confirmed':'Pickup at Counter 2',
+      scrollRef:this.scrollRef,stickyRef:this.stickyRef,bannerRef:this.bannerRef,markRef:this.markRef,
+      onScroll:()=>{const c=this.scrollRef.current,st=this.stickyRef.current,mk=this.markRef.current;if(!c||!st||!mk)return;const y=c.scrollTop+st.offsetHeight+10;let cur=null;c.querySelectorAll('[data-sec]').forEach(el=>{if(el.offsetTop<=y)cur=el.getAttribute('data-sec')});const stuck=c.scrollTop>=mk.offsetTop-2;const upd={};if(cur&&cur!==this.state.cat)upd.cat=cur;if(stuck!==this.state.stuck)upd.stuck=stuck;if(Object.keys(upd).length)this.setState(upd)},
+      onBannerScroll:()=>{const b=this.bannerRef.current;if(!b)return;const i=Math.round(b.scrollLeft/(b.clientWidth-20));if(i!==this.state.banner)this.setState({banner:Math.max(0,Math.min(2,i))})},
+      pauseBanner:()=>{this.paused=true},resumeBanner:()=>{this.paused=false},
+      dot0:dot(0)?RED:'rgba(18,18,18,.18)',dot1:dot(1)?RED:'rgba(18,18,18,.18)',dot2:dot(2)?RED:'rgba(18,18,18,.18)',dot0w:dot(0)?'18px':'6px',dot1w:dot(1)?'18px':'6px',dot2w:dot(2)?'18px':'6px',
+      bannerOffer:()=>this.toast('EAT50: Flat ₹50 off on orders above ₹499. Apply in cart. One use per order.'),
+      bannerCombo:()=>this.goCat('Burgers'),bannerNew:()=>this.openSheet(M[3]),
+      stickyShadow:s.stuck?'0 6px 12px -6px rgba(0,0,0,.15)':'none',
+      q:s.q,hasQ:!!s.q,onQ:e=>this.setState({q:e.target.value}),clearQ:()=>this.setState({q:''}),
+      startVoice:()=>{const SR=window.SpeechRecognition||window.webkitSpeechRecognition;if(!SR){this.toast('Voice search isn\'t supported in this browser. Type to search instead.');return}
+        try{const r=new SR();r.lang='en-IN';r.interimResults=true;r.onresult=e=>this.setState({q:Array.from(e.results).map(x=>x[0].transcript).join('')});
+          r.onerror=e=>{this.setState({listening:false});this.toast(e.error==='not-allowed'||e.error==='service-not-allowed'?'Microphone access is blocked. Allow it in settings or type instead.':'Couldn\'t catch that. Try again or type your search.')};
+          r.onend=()=>this.setState({listening:false});this.rec=r;r.start();this.setState({listening:true})}catch(e){this.toast('Voice search is unavailable right now.')}},
+      stopVoice:()=>{this.rec&&this.rec.abort();this.setState({listening:false})},listening:s.listening,micAnim:s.listening?this.anim('pulse'):null,
+      chips,cats,sections:secs.map(x=>({id:x.id,title:`${x.name} (${x.n})`,items:x.items})),noResults:!secs.length,clearAll:()=>this.setState({q:'',f:{}}),
+      isGrid:grid,isList:!grid,vegC,nonC,
+      toggleCatMenu:()=>this.setState(st=>({catMenu:!st.catMenu})),catMenu:s.catMenu,
+      showOfferStrip:hasCart&&!(s.coupon&&elig),offerText,ringDash:`${Math.min(1,t.sub/OMIN)*88} 88`,
+      showTableBar:dine&&live.length>0,tableBarText:`Table ${T} · ${live.length} order${live.length>1?'s':''} · ${fmt(accSub*1.05)} so far`,
+      hasCart,cartEmpty:!hasCart,cartCountText:t.count+(t.count>1?' items':' item')+' added',cartSubText:fmt(t.sub),
+      goCart:go('cart'),goMenu:go('menu'),goTable:go('table'),goBill:go('bill'),goThanks:go('thanks'),
+      openDrawer:()=>this.setState({drawer:true}),closeDrawer:()=>this.setState({drawer:false}),drawer:s.drawer,drawerItems,
+      openProfile:go('profile'),signIn:()=>this.toast('Phone sign-in uses the restaurant\'s existing OTP flow'),
+      lines,note:s.note,onNote:e=>this.setState({note:e.target.value}),billRows,cartTotal:fmt(t.total),
+      totalLabel:dine?'Order estimate':'To pay at counter',totalNote:dine?'Service charge is added to the final bill.':'Pay at the counter when you collect.',
+      couponSub:elig?'Valid on this order':'Add '+fmt(OMIN-t.sub)+' more to use',couponBtn:s.coupon&&elig?'Remove':'Apply',couponBorder:elig?RED:'rgba(18,18,18,.2)',couponFg:elig?RED:'rgba(18,18,18,.4)',
+      toggleCoupon:()=>{if(!elig){this.toast('Add '+fmt(OMIN-t.sub)+' more to use EAT50');return}const on=!(s.coupon&&elig);this.setState({coupon:on});this.toast(on?'EAT50 applied · ₹50 off':'EAT50 removed')},
+      name:s.name,phone:s.phone,onName:e=>this.setState({name:e.target.value,formErr:''}),onPhone:e=>this.setState({phone:e.target.value.replace(/\D/g,'').slice(0,10),formErr:''}),formErr:s.formErr,hasFormErr:!!s.formErr,
+      openConfirm:()=>{if(!hasCart)return;if(!s.user)return this.openOtp('confirm');this.setState({confirm:true})},
+      confirm:s.confirm,closeConfirm:()=>{if(!s.submitting)this.setState({confirm:false})},confirmTitle:dine?'Send this order to Table '+T+'?':'Place this takeaway order?',
+      confirmItems:s.cart.map(l=>l.qty+' × '+l.name).join(', '),placeLabel:s.submitting?'Placing order…':'Confirm order',
+      doPlace:()=>{if(this.state.submitting)return;this.setState({submitting:true});const idem=Date.now().toString(36);
+        this.later(()=>{const st=this.state;const tt=this.totals();const no=1042+st.orders.length;const ord={id:'o'+idem,idem,no,lines:st.cart.map(l=>({name:l.name,opts:l.opts,qty:l.qty,unit:l.unit})),sub:tt.sub,disc:tt.disc,total:tt.total,status:'pending',pay:'unpaid',reject:!!this.props.demoReject,note:st.note,times:{placed:now(),pending:now()}};
+          this.setState({orders:[...st.orders,ord],cart:[],note:'',coupon:false,confirm:false,submitting:false,trackId:ord.id,screen:'track'},()=>this.sim(ord.id))},1100)},
+      tr,trackAnim,restoreRejected:()=>{const r=o;if(!r)return;this.setState({cart:r.lines.map((l,i)=>{const it=M.find(m=>m.name===l.name)||{};return {key:(it.id||i)+'|r'+i+l.opts,id:it.id,name:l.name,veg:it.veg,unit:l.unit,qty:l.qty,opts:l.opts}}),screen:'cart'})},
+      tb,openWaiter:()=>{if(s.waiter!=='idle'){this.toast('Your request is already with the staff');return}this.setState({waiterOpen:true})},waiterOpen:s.waiterOpen,closeWaiter:()=>{if(s.waiter!=='sending')this.setState({waiterOpen:false})},
+      waiterForm:s.waiter==='idle'||s.waiter==='sending',waiterDone:s.waiter==='notified'||s.waiter==='ack',waiterSubmit:s.waiter==='sending'?'Notifying…':'Notify waiter',
+      reasons:REASONS.map(r=>{const a=s.reason===r;return {label:r,bg:a?INK:'#fff',fg:a?'#fff':INK,border:a?INK:'rgba(18,18,18,.15)',pick:()=>this.setState({reason:r})}}),
+      sendWaiter:()=>{if(this.state.waiter!=='idle')return;this.setState({waiter:'sending'});this.later(()=>{this.setState({waiter:'notified',waiterAt:now()});this.later(()=>this.setState({waiter:'ack'}),12000);this.later(()=>this.setState({waiter:'idle'}),24000)},1000)},
+      askBill:()=>{if(s.bill.status==='ready')return this.setState({screen:'bill'});if(s.bill.status==='requested')return this.toast('Bill already requested. The cashier is on it.');if(!acc.length)return this.toast(pend.length?'Wait until the restaurant confirms your order':'Place an order first');this.setState({billAsk:true})},
+      billAsk:s.billAsk,closeBillAsk:()=>this.setState({billAsk:false}),billPendingNote:pend.length?pend.length+' order still awaiting confirmation will only be billed if accepted.':'',
+      requestBill:()=>{this.setState({billAsk:false,bill:{status:'requested'}});this.toast('Bill requested');this.later(()=>this.billReady(),3500)},
+      bl,payUPI:()=>{this.setState({pay:'upiwait'})},upiDone:()=>{this.setState({pay:'awaiting'});this.later(()=>this.setState({pay:'paid'}),2500)},payTable:()=>{this.setState({pay:'staff'});this.later(()=>this.setState({pay:'paid'}),5000)},
+      thanksLine:b.total!=null?`Paid ${fmt(b.total)} · ${b.no} · Table ${T}`:'Smoke House Kitchen',
+      stars:[1,2,3,4,5].map(n=>({aria:n+' star'+(n>1?'s':''),fg:n<=s.stars?RED:'rgba(18,18,18,.18)',set:()=>this.setState({stars:n})})),rated:s.stars>0,
+      newSession:()=>{this.timers.forEach(clearTimeout);this.timers=[];try{localStorage.removeItem(this.skey())}catch(e){}this.setState(fresh())},
+      rescan:()=>this.toast('Point your camera at the QR on your table'),
+      sheetOpen:!!s.sheet,sh,sQty:s.sQty,sNote:s.sNote,onSNote:e=>this.setState({sNote:e.target.value}),closeSheet:()=>this.setState({sheet:null}),
+      sDec:()=>this.setState(st=>({sQty:Math.max(1,st.sQty-1)})),sInc:()=>this.setState(st=>({sQty:Math.min(20,st.sQty+1)})),
+      addFromSheet:()=>{const {it,unit,miss,labels}=this.sheetCalc();if(miss)return this.toast('Please select '+miss.toLowerCase());const sel={...s.sel};if(s.sNote.trim())sel.note=s.sNote.trim();const opts=[...labels,...(s.sNote.trim()?['“'+s.sNote.trim()+'”']:[])].join(', ');this.addLine(it,sel,s.sQty,opts,unit);this.setState({sheet:null});this.toast(it.name+' added')},
+      openSwitch:()=>this.setState({sw:1,drawer:false}),closeSwitch:()=>this.setState({sw:0,swTarget:null}),switchOpen:s.sw>0,swStep1:s.sw===1,swStep2:s.sw===2,swStep3:s.sw===3,
+      swHasOrders:live.length>0||hasCart,swOrdersNote:(live.length?(dine?'Your '+live.length+' order'+(live.length>1?'s stay':' stays')+' on Table '+T+'\'s bill. ':'Your current pickup order stays active. '):'')+(hasCart?'Items in your cart won\'t move to the new order.':''),
+      swScan:()=>{this.setState({sw:0});this.toast('Open your phone camera and scan the QR on your table or at the counter')},
+      swTargets:[...(dine?[]:[{m:'dine-in',t:'07',label:'Table 07 QR',sub:'Dine-in'}]),{m:'dine-in',t:'12',label:'Table 12 QR',sub:'Dine-in'},...(take?[]:[{m:'takeaway',t:'07',label:'Takeaway counter QR',sub:'Pickup'}])].filter(x=>!(x.m===this.mode()&&x.t===T)).map(x=>({label:x.label,sub:x.sub,pick:()=>this.setState({sw:3,swTarget:x})})),
+      swConfirmTitle:s.swTarget?(s.swTarget.m==='takeaway'?'Start a takeaway order?':'Move to Table '+s.swTarget.t+'?'):'',
+      swConfirmBody:s.swTarget?(s.swTarget.m==='takeaway'?'This starts a separate pickup order with its own bill.':'New orders will go to Table '+s.swTarget.t+'.')+(live.length&&dine?' Table '+T+' keeps its existing orders and bill.':'')+(hasCart?' Your current cart stays here.':''):'',
+      swConfirm:()=>{const x=s.swTarget;if(!x)return;this.timers.forEach(clearTimeout);this.timers=[];this.setState({...fresh(),mo:x.m,to:x.t,...this.loadSaved(x.m,x.t)},()=>{this.resume();this.toast(x.m==='takeaway'?'Takeaway order started':'Now ordering for Table '+x.t);this.scrollRef.current&&this.scrollRef.current.scrollTo({top:0})})},
+      deals:[3,12,2,13].map(id=>{const it=M.find(m=>m.id===id);return {...card(it),off:Math.round((1-it.price/it.mrp)*100)+'% OFF'}}),
+      dealClockRef:this.dealClockRef,dealClock:this.clockText(),
+      qrs:QRS.map(x=>{const cur=x.m===this.mode()&&(x.m!=='dine-in'||x.t===T);let url='';try{const u=new URL(this.props.qrBaseUrl||location.href);u.searchParams.set('qr',x.k);u.searchParams.set('app','1');url=u.toString()}catch(e){}return {label:x.label,sub:x.sub,bg:qrBg(url),img:'https://api.qrserver.com/v1/create-qr-code/?size=184x184&margin=0&color=121212&data='+encodeURIComponent(url),border:cur?RED:'transparent',btn:cur?'Current · rescan':'Scan',btnBg:cur?RED:INK,scan:()=>this.scanQR(x.m,x.t)}}),
+      isProfile:!invalid&&scr==='profile',isMunchi:!invalid&&scr==='munchi',goProfile:go('profile'),
+      loggedIn:!!s.user,loggedOut:!s.user,userName:s.user?s.user.name:'',userInitial:s.user?s.user.name.trim().charAt(0).toUpperCase():'',userPhone:s.user?'+91 '+s.user.phone.slice(0,5)+' '+s.user.phone.slice(5):'',
+      waCardSub:take?'Needed for pickup · we message when it\'s ready':'Optional · order status and your bill',
+      openOtp:()=>this.openOtp(null),closeOtp:()=>this.setState({otp:null}),
+      noOrders:!s.orders.length,profileOrders:[...s.orders].reverse().map(x=>({no:x.no,where:dine?'Table '+T:'Takeaway',status:(chip[x.status]||['Collected'])[0],amount:fmt(x.total),open:()=>this.setState({trackId:x.id,screen:'track'})})),
+      toggleWa:()=>this.setState(st=>({waOn:!st.waOn})),waTrack:s.waOn?RED:'rgba(18,18,18,.2)',waKnob:s.waOn?'21px':'3px',
+      helpToast:()=>this.toast(dine?'Use Call waiter on Your table for help':'Visit Counter 2 or call +91 80 4000 1234'),
+      logout:()=>{this.setUser(null);this.toast('Logged out')},
+      openMunchi:()=>this.setState({screen:'munchi',drawer:false,reel:0}),reelRef:this.reelRef,cartCount:t.count,
+      onReelScroll:()=>{const r=this.reelRef.current;if(!r)return;const i=Math.round(r.scrollTop/r.clientHeight);if(i!==this.state.reel)this.setState({reel:i})},
+      reels:REELS.map((rl,i)=>{const it=M.find(m=>m.id===rl.id);const c=card(it);const lk=!!s.liked[rl.id];const act=i===s.reel;return {...c,bg:'url(https://images.unsplash.com/photo-'+rl.ph+'?w=700&h=1300&q=70&auto=format&fit=crop)',caption:rl.cap,likes:kfmt(rl.likes+(lk?1:0)),heartFill:lk?RED:'none',heartStroke:lk?RED:'#fff',anim:act&&!this.rm?'kb 9s ease-out forwards':'none',prog:act&&!this.rm?'prog 9s linear forwards':'none',progW:act?(this.rm?'100%':'0'):(i<s.reel?'100%':'0'),
+        like:()=>this.setState(st=>({liked:{...st.liked,[rl.id]:!st.liked[rl.id]}})),share:()=>{try{navigator.clipboard&&navigator.clipboard.writeText(it.name+' at Smoke House Kitchen')}catch(e){}this.toast('Link copied')}}}),
+      otpOpen:!!s.otp,otpPhone:!!s.otp&&s.otp.step==='phone',otpCode:!!s.otp&&s.otp.step==='code',otpName:!!s.otp&&s.otp.step==='name',
+      otpReason:s.otp&&s.otp.after==='confirm'?'Verify your number to place your order. We\'ll send order updates here.':'Sign in to get order updates and your bill.',
+      otpPhoneVal:s.otp?s.otp.phone:'',otpCodeVal:s.otp?s.otp.code:'',otpNameVal:s.otp?s.otp.name:'',otpErr:s.otp?s.otp.err:'',otpHasErr:!!(s.otp&&s.otp.err),
+      otpBorder:s.otp&&s.otp.err?RED:'rgba(18,18,18,.2)',otpSendBg:s.otp&&/^[6-9]\d{9}$/.test(s.otp.phone)&&!s.otp.busy?RED:'rgba(18,18,18,.3)',otpSendLabel:s.otp&&s.otp.busy?'Sending code…':'Send code',
+      otpMasked:s.otp?'+91 '+s.otp.phone.slice(0,2)+'••• ••'+s.otp.phone.slice(7):'',
+      otpBoxes:[0,1,2,3].map(i=>{const c=s.otp?s.otp.code:'';return {ch:c[i]||'',border:s.otp&&s.otp.err?RED:(i===c.length?INK:'rgba(18,18,18,.2)')}}),
+      resendLabel:s.otp&&s.otp.left>0?'Resend in 0:'+String(s.otp.left).padStart(2,'0'):'Resend code',resendFg:s.otp&&s.otp.left>0?'rgba(18,18,18,.45)':RED,
+      nameBtnBg:s.otp&&s.otp.name.trim().length>=2?RED:'rgba(18,18,18,.3)',
+      onOtpPhone:e=>{const v=e.target.value.replace(/\D/g,'').slice(-10);this.setState(st=>({otp:{...st.otp,phone:v,err:''}}))},
+      sendOtp:()=>{const o=this.state.otp;if(!o||o.busy)return;if(!/^[6-9]\d{9}$/.test(o.phone))return this.setState({otp:{...o,err:'Enter a valid 10-digit mobile number.'}});this.setState({otp:{...o,busy:true,err:''}});this.later(()=>this.setState(st=>st.otp?{otp:{...st.otp,busy:false,step:'code',code:'',left:30}}:null),900)},
+      otpEdit:()=>this.setState(st=>({otp:{...st.otp,step:'phone',code:'',err:''}})),
+      resendOtp:()=>{const o=this.state.otp;if(!o||o.left>0)return;this.setState({otp:{...o,left:30,code:'',err:''}});this.toast('New code sent on WhatsApp')},
+      onOtpCode:e=>{const v=e.target.value.replace(/\D/g,'').slice(0,4);this.setState(st=>({otp:{...st.otp,code:v,err:''}}),()=>{if(v.length===4){if(v==='4821'){const o=this.state.otp;if(o.name&&o.name.trim().length>=2)this.finishOtp();else this.setState({otp:{...o,step:'name'}})}else this.setState(st=>({otp:{...st.otp,code:'',err:'That code is incorrect. Try again.'}}))}})},
+      onOtpName:e=>this.setState(st=>({otp:{...st.otp,name:e.target.value}})),
+      saveOtpName:()=>{if(this.state.otp.name.trim().length<2)return;this.finishOtp()},
+      upiId:UPI_ID,upiLink:upi(b.total||0,b.no||'Bill'),upiQrBg:qrBg(upi(b.total||0,b.no||'Bill')),
+      copyUpi:()=>{try{navigator.clipboard.writeText(UPI_ID)}catch(e){}this.toast('UPI ID copied')},
+      trUpi:!!o&&take&&o.status!=='rejected'&&o.pay==='unpaid',trUpiWait:!!o&&take&&o.pay==='upiwait',trUpiLink:o?upi(o.total,'Order '+o.no):'',
+      trPay:()=>this.setState(st=>({orders:st.orders.map(x=>x.id===o.id?{...x,pay:'upiwait'}:x)})),
+      trPaid:()=>{this.setState(st=>({orders:st.orders.map(x=>x.id===o.id?{...x,pay:'paid'}:x)}));this.toast('Payment marked as done')},
+      framed:!s.bare,topOff:s.bare?'env(safe-area-inset-top, 0px)':'44px',outerPad:s.bare?'0':'32px 16px',outerBg:s.bare?'#fff':'transparent',
+      phoneW:s.bare?'100%':'390px',phoneH:s.bare?'100dvh':'844px',phoneR:s.bare?'0':'54px',phonePad:s.bare?'0':'10px',phoneShadow:s.bare?'none':'0 30px 60px rgba(0,0,0,.18)',screenR:s.bare?'0':'44px',
+      hasToast:!!s.toast,toast:s.toast
+    };
+  }
+}
+</script>
+</body>
+</html>

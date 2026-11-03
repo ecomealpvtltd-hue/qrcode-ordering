@@ -1,0 +1,12 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Table QR codes · Smoke House Kitchen</title>
+<script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.js"></script>
+<style>body{margin:0;font-family:Helvetica,Arial,sans-serif;color:#121212;background:#f5f4f3}main{max-width:960px;margin:0 auto;padding:32px 16px}h1{font-size:24px;margin:0 0 4px}p{margin:0 0 20px;color:#555}.row{display:flex;gap:10px;align-items:center;margin-bottom:20px;flex-wrap:wrap}input{height:40px;border:1px solid #ccc;border-radius:8px;padding:0 10px;font-size:15px;width:90px}button{height:40px;border:none;border-radius:8px;background:#121212;color:#fff;padding:0 16px;font-size:14px;cursor:pointer}.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px}.card{background:#fff;border-radius:16px;padding:18px;text-align:center;break-inside:avoid}.card img{width:180px;height:180px}.t{font-size:20px;font-weight:700;margin-top:8px}.s{font-size:12px;color:#777;margin-top:2px}.brand{color:#E73F1E;font-weight:700;font-size:13px;letter-spacing:1px}@media print{body{background:#fff}.row,p,h1{display:none}.card{border:1px solid #ddd}}</style></head>
+<body><main><h1>Table QR codes</h1><p>Print and place one on each table. Each code opens the menu for that table.</p>
+<div class="row"><label>Tables 1 to <input id="n" type="number" value="12" min="1" max="99"></label><button onclick="draw()">Generate</button><button onclick="print()">Print</button></div>
+<div class="grid" id="g"></div></main>
+<script>
+function qr(u){var q=qrcode(0,'M');q.addData(u);q.make();return q.createDataURL(6,2)}
+function card(label,k){var u=location.origin+'/?qr='+k;return '<div class="card"><div class="brand">SMOKE HOUSE KITCHEN</div><img alt="" src="'+qr(u)+'"><div class="t">'+label+'</div><div class="s">Scan to order</div></div>'}
+function draw(){var n=Math.min(99,Math.max(1,+document.getElementById('n').value||12)),h=card('Takeaway','takeaway');for(var i=1;i<=n;i++){var t=String(i).padStart(2,'0');h+=card('Table '+t,'table-'+t)}document.getElementById('g').innerHTML=h}
+draw();
+</script></body></html>
